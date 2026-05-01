@@ -2,11 +2,6 @@
 
 let currentEditId = null;
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderTable();
-  document.getElementById('packageForm').addEventListener('submit', handleFormSubmit);
-});
-
 // ---- UI RENDERING ----
 function renderTable() {
   const tbody = document.getElementById('packageTableBody');
@@ -117,6 +112,8 @@ function editPackage(id) {
   document.getElementById('pkgOverview').value = pkg.overviewText || '';
   document.getElementById('pkgNights').value = pkg.nights || '';
   document.getElementById('pkgType').value = pkg.type || '';
+  document.getElementById('pkgRegion').value = pkg.region || '';
+  document.getElementById('pkgStyle').value = pkg.style || '';
 
   // Populate Expectations & Suggestions
   document.getElementById('expectList').innerHTML = '';
@@ -216,6 +213,8 @@ function handleFormSubmit(e) {
     meta: document.getElementById('pkgMeta').value,
     departure: document.getElementById('pkgDeparture').value,
     category: document.getElementById('pkgCategory').value,
+    region: document.getElementById('pkgRegion').value,
+    style: document.getElementById('pkgStyle').value,
     heroImage: document.getElementById('pkgImage').value,
     overviewText: document.getElementById('pkgOverview').value,
     nights: document.getElementById('pkgNights').value,
@@ -234,3 +233,115 @@ function handleFormSubmit(e) {
   closePackageModal();
   renderTable();
 }
+
+// ============================================
+// CATEGORIES LOGIC
+// ============================================
+
+document.addEventListener('DOMContentLoaded', () => {
+  renderTable();
+  document.getElementById('packageForm').addEventListener('submit', handleFormSubmit);
+
+  // Categories init
+  renderAdminCategories();
+  populateSubRegionSelect();
+  document.getElementById('catMainRegion')?.addEventListener('change', populateSubRegionSelect);
+  document.getElementById('addCategoryForm')?.addEventListener('submit', handleAddCategory);
+});
+
+function switchAdminTab(tab) {
+  document.getElementById('packagesTab').style.display = tab === 'packages' ? 'block' : 'none';
+  document.getElementById('categoriesTab').style.display = tab === 'categories' ? 'block' : 'none';
+  
+  document.getElementById('navPackages').classList.toggle('active', tab === 'packages');
+  document.getElementById('navCategories').classList.toggle('active', tab === 'categories');
+
+  document.getElementById('adminMainTitle').textContent = tab === 'packages' ? 'Manage Tour Packages' : 'Manage Destinations';
+  document.getElementById('adminMainActionBtn').style.display = tab === 'packages' ? 'inline-flex' : 'none';
+}
+
+function renderAdminCategories() {
+  const catIndia = document.getElementById('catListIndia');
+  const catIntl = document.getElementById('catListIntl');
+  if (!catIndia || !catIntl || !window.navCategories) return;
+
+  const buildList = (regionKey) => {
+    let html = '';
+    for (const [subRegion, places] of Object.entries(window.navCategories[regionKey] || {})) {
+      html += `<div style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:12px;">`;
+      html += `<h5 style="margin:0 0 10px; font-size:0.8rem; text-transform:uppercase; color:#64748b;">${subRegion}</h5>`;
+      
+      if (places.length === 0) {
+        html += `<div style="font-size:0.85rem; color:#94a3b8; font-style:italic;">No destinations</div>`;
+      } else {
+        places.forEach((place, index) => {
+          html += `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:8px; background:#fff; border:1px solid #eee; border-radius:6px; margin-bottom:6px;">
+              <span style="font-size:0.9rem; font-weight:500;">${place.name}</span>
+              <button onclick="deleteCategory('${regionKey}', '${subRegion}', ${index})" style="background:none; border:none; color:#e74c3c; cursor:pointer; font-size:1.1rem; line-height:1;" title="Remove">✕</button>
+            </div>
+          `;
+        });
+      }
+      html += `</div>`;
+    }
+    return html;
+  };
+
+  catIndia.innerHTML = buildList('india');
+  catIntl.innerHTML = buildList('international');
+}
+
+function populateSubRegionSelect() {
+  const region = document.getElementById('catMainRegion')?.value;
+  const subSelect = document.getElementById('catSubRegion');
+  if (!region || !subSelect || !window.navCategories) return;
+
+  subSelect.innerHTML = '';
+  const subRegions = Object.keys(window.navCategories[region] || {});
+  subRegions.forEach(sub => {
+    const opt = document.createElement('option');
+    opt.value = sub;
+    opt.textContent = sub;
+    subSelect.appendChild(opt);
+  });
+}
+
+function handleAddCategory(e) {
+  e.preventDefault();
+  const nameInput = document.getElementById('catName');
+  const region = document.getElementById('catMainRegion').value;
+  const subRegion = document.getElementById('catSubRegion').value;
+  
+  const name = nameInput.value.trim();
+  if (!name) return;
+
+  // Generate ID/Slug
+  const id = name.toLowerCase().replace(/[^a-z0-9]+/g, '');
+
+  if (!window.navCategories[region][subRegion]) {
+    window.navCategories[region][subRegion] = [];
+  }
+  
+  window.navCategories[region][subRegion].push({ name, id });
+  
+  if (typeof saveNavCategories === 'function') {
+    saveNavCategories(window.navCategories);
+  }
+
+  nameInput.value = '';
+  renderAdminCategories();
+  alert(`${name} added to ${subRegion} (${region})`);
+}
+
+function deleteCategory(region, subRegion, index) {
+  const place = window.navCategories[region][subRegion][index];
+  if (confirm(`Remove "${place.name}" from ${subRegion}?`)) {
+    window.navCategories[region][subRegion].splice(index, 1);
+    if (typeof saveNavCategories === 'function') {
+      saveNavCategories(window.navCategories);
+    }
+    renderAdminCategories();
+  }
+}
+

@@ -27,216 +27,298 @@ document.addEventListener('DOMContentLoaded', () => {
     );
   }
 
+  // ---- DYNAMIC NAVBAR DROPDOWNS ----
+  function renderNavDropdowns() {
+    if (!window.navCategories) return;
+    
+    // Find the India and International nav items
+    const navItems = document.querySelectorAll('.nav-item');
+    let indiaDropdown = null;
+    let intlDropdown = null;
+
+    navItems.forEach(item => {
+      const linkText = item.querySelector('.nav-link')?.textContent.trim();
+      if (linkText === 'India ▾') indiaDropdown = item.querySelector('.mega-dropdown');
+      if (linkText === 'International ▾') intlDropdown = item.querySelector('.mega-dropdown');
+    });
+
+    const buildMegaMenu = (dataObj) => {
+      let html = '';
+      for (const [subRegion, places] of Object.entries(dataObj)) {
+        html += `<div class="mega-col"><div class="mega-title">${subRegion}</div>`;
+        places.forEach(place => {
+          html += `<a href="destination-tours.html?dest=${place.id}">${place.name}</a>`;
+        });
+        html += `</div>`;
+      }
+      return html;
+    };
+
+    if (indiaDropdown && window.navCategories.india) {
+      indiaDropdown.innerHTML = buildMegaMenu(window.navCategories.india);
+    }
+    if (intlDropdown && window.navCategories.international) {
+      intlDropdown.innerHTML = buildMegaMenu(window.navCategories.international);
+    }
+  }
+  
+  // Call it immediately
+  renderNavDropdowns();
+
+  // ---- DYNAMIC STYLE COUNTS (HOMEPAGE) ----
+  function updateStyleCounts() {
+    if (!window.tourData) return;
+    const catCards = document.querySelectorAll('.cat-card');
+    if (!catCards.length) return;
+
+    catCards.forEach(card => {
+      const nameEl = card.querySelector('.cat-name');
+      const countEl = card.querySelector('.cat-count');
+      if (!nameEl || !countEl) return;
+
+      const styleName = nameEl.textContent.trim().toLowerCase();
+      let count = 0;
+
+      for (const [, pkg] of Object.entries(window.tourData)) {
+        const pkgStyle = (pkg.style || '').toLowerCase();
+        const fallback = ((pkg.title||'') + ' ' + (pkg.overviewText||'')).toLowerCase();
+        
+        if (pkgStyle === styleName || pkgStyle.includes(styleName) || fallback.includes(styleName)) {
+          count++;
+        }
+      }
+
+      countEl.textContent = `${count} package${count !== 1 ? 's' : ''}`;
+    });
+  }
+
+  updateStyleCounts();
+
   // ---- BACK TO TOP ----
   backToTop?.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
   // ---- DYNAMIC PACKAGE RENDERING & FILTERING ----
-  const dynamicGrid = document.getElementById('dynamic-pkg-grid');
+  const dynamicGrid   = document.getElementById('dynamic-pkg-grid');
   const applyFiltersBtn = document.getElementById('applyFiltersBtn');
-  const toursCount = document.querySelector('.tours-count strong');
+  const toursCount    = document.querySelector('.tours-count strong');
+  const priceRange    = document.getElementById('priceRange');
+  const priceDisplay  = document.getElementById('priceDisplay');
+  const sortSelect    = document.getElementById('sortSelect');
 
-  function renderPackages(filteredData, sortBy = 'recommended') {
+  // ---- HELPERS ----
+  function getPrice(pkg) {
+    if (!pkg.price) return 0;
+    return parseInt(pkg.price.replace(/[^0-9]/g, ''), 10) || 0;
+  }
+  function getNights(pkg) {
+    const m = pkg.meta && pkg.meta.match(/(\d+)N/);
+    return m ? parseInt(m[1], 10) : 0;
+  }
+
+  // ---- RENDER ----
+  function renderPackages(data, sortBy) {
     if (!dynamicGrid) return;
+    sortBy = sortBy || 'recommended';
+    let entries = Object.entries(data || {});
+
+    // Sort
+    if      (sortBy === 'price-low')      entries.sort((a, b) => getPrice(a[1]) - getPrice(b[1]));
+    else if (sortBy === 'price-high')     entries.sort((a, b) => getPrice(b[1]) - getPrice(a[1]));
+    else if (sortBy === 'duration-short') entries.sort((a, b) => getNights(a[1]) - getNights(b[1]));
+    else if (sortBy === 'duration-long')  entries.sort((a, b) => getNights(b[1]) - getNights(a[1]));
+
+    // Clear
     dynamicGrid.innerHTML = '';
-    let delayCounter = 0;
-    let dataArray = Object.entries(filteredData);
-    
-    if (dataArray.length === 0) {
+
+    // No results
+    if (entries.length === 0) {
       dynamicGrid.innerHTML = `
-        <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px;">
-          <h3 style="font-family:'Playfair Display',serif; font-size: 24px; margin-bottom: 12px;">No packages found</h3>
-          <p style="color:var(--text-muted); margin-bottom: 24px;">Try adjusting your filters or clearing them to see more options.</p>
-          <button class="btn btn-outline" onclick="location.reload()" style="border-radius:12px;">Clear All Filters</button>
-        </div>
-      `;
+        <div style="grid-column:1/-1;text-align:center;padding:70px 20px;">
+          <div style="font-size:52px;margin-bottom:18px;">&#128269;</div>
+          <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--primary);margin-bottom:12px;">No packages found</h3>
+          <p style="color:var(--text-muted);max-width:380px;margin:0 auto 28px;">Try adjusting your filters or reset them to see all available tours.</p>
+          <button class="btn btn-primary" onclick="window.resetFilters&&window.resetFilters()">&#8635; Reset Filters</button>
+        </div>`;
       if (toursCount) toursCount.textContent = '0';
       return;
     }
 
-    // ---- SORTING LOGIC ----
-    if (sortBy === 'price-low') {
-      dataArray.sort((a, b) => {
-        const priceA = parseInt(a[1].price.replace(/[^0-9]/g, '')) || 0;
-        const priceB = parseInt(b[1].price.replace(/[^0-9]/g, '')) || 0;
-        return priceA - priceB;
-      });
-    } else if (sortBy === 'price-high') {
-      dataArray.sort((a, b) => {
-        const priceA = parseInt(a[1].price.replace(/[^0-9]/g, '')) || 0;
-        const priceB = parseInt(b[1].price.replace(/[^0-9]/g, '')) || 0;
-        return priceB - priceA;
-      });
-    } else if (sortBy === 'duration-short') {
-      dataArray.sort((a, b) => {
-        const daysA = parseInt(a[1].meta.match(/(\d+)N/)?.[1] || 0);
-        const daysB = parseInt(b[1].meta.match(/(\d+)N/)?.[1] || 0);
-        return daysA - daysB;
-      });
-    } else if (sortBy === 'duration-long') {
-      dataArray.sort((a, b) => {
-        const daysA = parseInt(a[1].meta.match(/(\d+)N/)?.[1] || 0);
-        const daysB = parseInt(b[1].meta.match(/(\d+)N/)?.[1] || 0);
-        return daysB - daysA;
-      });
-    }
-    
-    if (toursCount) toursCount.textContent = dataArray.length;
+    if (toursCount) toursCount.textContent = entries.length;
 
-    dataArray.forEach(([id, pkg]) => {
-      const delayClass = delayCounter % 3 === 0 ? '' : (delayCounter % 3 === 1 ? 'fade-up-delay-1' : 'fade-up-delay-2');
-      const badgeHtml = pkg.category === 'group' ? `<span class="pkg-badge group">Group Tour</span>` : 
-                        (delayCounter % 2 === 0 ? `<span class="pkg-badge">Recommended</span>` : `<span class="pkg-badge sale">Popular</span>`);
-      
-      const priceHtml = `<div class="current">${pkg.price} <span class="per">/ person</span></div>`;
-      
-      const cardHTML = `
-        <div class="pkg-card fade-up visible ${delayClass}" data-category="${pkg.category || 'domestic'}">
+    entries.forEach(([id, pkg], i) => {
+      const delay   = i % 3 === 1 ? 'fade-up-delay-1' : i % 3 === 2 ? 'fade-up-delay-2' : '';
+      const badge   = pkg.category === 'group'
+        ? `<span class="pkg-badge group">Group Tour</span>`
+        : `<span class="pkg-badge">Recommended</span>`;
+      const image   = pkg.heroImage || '';
+      const price   = pkg.price   || 'Contact us';
+      const depart  = pkg.departure || (pkg.meta && pkg.meta.split('\u2022')[1]) || '';
+
+      dynamicGrid.insertAdjacentHTML('beforeend', `
+        <div class="pkg-card fade-up visible ${delay}" data-category="${pkg.category||'domestic'}">
           <div class="pkg-img-wrap">
-            <div class="pkg-placeholder" style="height:100%;background-image:url('${pkg.heroImage}');background-size:cover;background-position:center;"></div>
-            ${badgeHtml}
+            <div class="pkg-placeholder" style="height:100%;background-image:url('${image}');background-size:cover;background-position:center;"></div>
+            ${badge}
           </div>
           <div class="pkg-body">
-            <div class="pkg-meta"><span class="pkg-duration">${pkg.meta.split('•')[0]}</span></div>
-            <h3 class="pkg-title">${pkg.title}</h3>
-            <p class="pkg-locations">${pkg.departure || pkg.meta.split('•')[1]}</p>
+            <div class="pkg-meta"><span class="pkg-duration">${pkg.meta ? pkg.meta.split('\u2022')[0] : ''}</span></div>
+            <h3 class="pkg-title">${pkg.title||''}</h3>
+            <p class="pkg-locations">${depart}</p>
             <div class="pkg-footer">
-              <div class="pkg-price">${priceHtml}</div>
+              <div class="pkg-price"><div class="current">${price} <span class="per">/ person</span></div></div>
               <a href="tour-detail.html?pkg=${id}" class="btn btn-primary pkg-btn">View Details</a>
             </div>
           </div>
-        </div>
-      `;
-      dynamicGrid.insertAdjacentHTML('beforeend', cardHTML);
-      delayCounter++;
+        </div>`);
     });
   }
 
+  // ---- FILTER ----
   function applyFilters() {
-    const selectedTypes = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(el => el.value);
+    if (!window.tourData) return;
+
+    const selectedTypes     = Array.from(document.querySelectorAll('input[name="type"]:checked')).map(el => el.value);
     const selectedDurations = Array.from(document.querySelectorAll('input[name="duration"]:checked')).map(el => el.value);
-    const selectedRegions = Array.from(document.querySelectorAll('input[name="region"]:checked')).map(el => el.value);
-    const selectedStyles = Array.from(document.querySelectorAll('input[name="style"]:checked')).map(el => el.value);
-    const maxPrice = parseInt(document.getElementById('priceRange').value);
-    const sortBy = document.getElementById('sortSelect')?.value || 'recommended';
+    const selectedRegions   = Array.from(document.querySelectorAll('input[name="region"]:checked')).map(el => el.value);
+    const selectedStyles    = Array.from(document.querySelectorAll('input[name="style"]:checked')).map(el => el.value);
+    const maxPrice          = priceRange ? parseInt(priceRange.value, 10) : 999999;
+    const sortBy            = sortSelect  ? sortSelect.value : 'recommended';
 
-    const filtered = Object.fromEntries(Object.entries(window.tourData).filter(([id, pkg]) => {
-      // 1. Tour Type
-      const pkgType = pkg.category || 'domestic';
-      if (selectedTypes.length > 0 && !selectedTypes.includes('all') && !selectedTypes.includes(pkgType)) return false;
+    const filtered = Object.fromEntries(
+      Object.entries(window.tourData).filter(([, pkg]) => {
 
-      // 2. Budget
-      const price = parseInt(pkg.price.replace(/[^0-9]/g, ''));
-      if (price > maxPrice) return false;
+        // 1. Type
+        if (selectedTypes.length && !selectedTypes.includes('all')) {
+          const t = (pkg.category || 'domestic').toLowerCase();
+          if (!selectedTypes.some(s => s.toLowerCase() === t)) return false;
+        }
 
-      // 3. Duration (Roughly)
-      if (selectedDurations.length > 0) {
-        const days = parseInt(pkg.meta.match(/(\d+)N/)?.[1] || 0) + 1;
-        const matchesDuration = selectedDurations.some(d => {
-          if (d === '1-3') return days >= 1 && days <= 3;
-          if (d === '4-6') return days >= 4 && days <= 6;
-          if (d === '7-10') return days >= 7 && days <= 10;
-          if (d === '10+') return days > 10;
-          return false;
-        });
-        if (!matchesDuration) return false;
-      }
+        // 2. Price
+        const price = getPrice(pkg);
+        if (price > 0 && price > maxPrice) return false;
 
-      // 4. Region
-      if (selectedRegions.length > 0) {
-        const metaStr = (pkg.meta + " " + pkg.title + " " + (pkg.region || "")).toLowerCase();
-        const matchesRegion = selectedRegions.some(r => metaStr.includes(r.toLowerCase()));
-        if (!matchesRegion) return false;
-      }
+        // 3. Duration
+        if (selectedDurations.length) {
+          const nights = getNights(pkg);
+          const days   = nights + 1;
+          const ok = selectedDurations.some(d => {
+            if (d === '1-3')  return days >= 1  && days <= 3;
+            if (d === '4-6')  return days >= 4  && days <= 6;
+            if (d === '7-10') return days >= 7  && days <= 10;
+            if (d === '10+')  return days > 10;
+            return false;
+          });
+          if (!ok) return false;
+        }
 
-      // 5. Style
-      if (selectedStyles.length > 0) {
-        const textStr = (pkg.title + " " + pkg.overviewText + " " + (pkg.style || "")).toLowerCase();
-        const matchesStyle = selectedStyles.some(s => textStr.includes(s.toLowerCase()));
-        if (!matchesStyle) return false;
-      }
+        // 4. Region — exact field match first, then fuzzy fallback
+        if (selectedRegions.length) {
+          const pkgRegion = (pkg.region || '').toLowerCase();
+          const fallback  = ((pkg.meta||'') + ' ' + (pkg.title||'')).toLowerCase();
+          const ok = selectedRegions.some(r => {
+            const rl = r.toLowerCase();
+            return pkgRegion === rl || pkgRegion.includes(rl) || fallback.includes(rl);
+          });
+          if (!ok) return false;
+        }
 
-      return true;
-    }));
+        // 5. Style — exact field match first, then fuzzy fallback
+        if (selectedStyles.length) {
+          const pkgStyle = (pkg.style || '').toLowerCase();
+          const fallback = ((pkg.title||'') + ' ' + (pkg.overviewText||'')).toLowerCase();
+          const ok = selectedStyles.some(s => {
+            const sl = s.toLowerCase();
+            return pkgStyle === sl || pkgStyle.includes(sl) || fallback.includes(sl);
+          });
+          if (!ok) return false;
+        }
+
+        return true;
+      })
+    );
 
     renderPackages(filtered, sortBy);
-    const layout = document.querySelector('.tours-layout');
-    if (layout) window.scrollTo({ top: layout.offsetTop - 100, behavior: 'smooth' });
   }
 
-  if (dynamicGrid && typeof window.tourData !== 'undefined') {
-    console.log("Tour data loaded, initializing packages...");
+  // ---- RESET ----
+  function resetFilters() {
+    document.querySelectorAll('.filter-sidebar input[type="checkbox"]').forEach(cb => { cb.checked = false; });
+    const allBtn = document.getElementById('type-all');
+    if (allBtn) allBtn.checked = true;
+    if (priceRange) {
+      priceRange.value = priceRange.max;
+      if (priceDisplay) priceDisplay.textContent = '\u20b9' + parseInt(priceRange.max, 10).toLocaleString('en-IN');
+    }
+    if (sortSelect) sortSelect.value = 'recommended';
     renderPackages(window.tourData);
-    
-    applyFiltersBtn?.addEventListener('click', () => {
-      console.log("Apply Filters clicked");
-      applyFilters();
-    });
+    if (toursCount) toursCount.textContent = Object.keys(window.tourData || {}).length;
+  }
+  window.resetFilters = resetFilters;
 
-    document.getElementById('sortSelect')?.addEventListener('change', () => {
-      console.log("Sort changed");
-      applyFilters();
-    });
-    
-    // Auto-apply when any filter changes for better UX
-    document.querySelectorAll('.filter-sidebar input').forEach(input => {
-      input.addEventListener('change', () => {
-        if (input.type === 'checkbox') {
-          // Strict Type Toggling
-          if (input.name === 'type') {
-            if (input.id === 'type-all' && input.checked) {
-              document.querySelectorAll('input[name="type"]').forEach(i => { if (i.id !== 'type-all') i.checked = false; });
-            } else if (input.checked) {
-              const allBtn = document.getElementById('type-all');
-              if (allBtn) allBtn.checked = false;
-            }
+  // ---- BOOT ----
+  if (dynamicGrid && window.tourData) {
+
+    // Set initial price display
+    if (priceRange && priceDisplay) {
+      priceDisplay.textContent = '\u20b9' + parseInt(priceRange.value, 10).toLocaleString('en-IN');
+    }
+
+    // Initial render
+    renderPackages(window.tourData);
+
+    // Apply button
+    if (applyFiltersBtn) applyFiltersBtn.addEventListener('click', applyFilters);
+
+    // Sort dropdown
+    if (sortSelect) sortSelect.addEventListener('change', applyFilters);
+
+    // Price slider — real-time
+    if (priceRange) {
+      priceRange.addEventListener('input', () => {
+        if (priceDisplay) priceDisplay.textContent = '\u20b9' + parseInt(priceRange.value, 10).toLocaleString('en-IN');
+        applyFilters();
+      });
+    }
+
+    // Checkboxes — real-time with 'All Tours' mutual-exclusion logic
+    document.querySelectorAll('.filter-sidebar input[type="checkbox"]').forEach(cb => {
+      cb.addEventListener('change', () => {
+        if (cb.name === 'type') {
+          if (cb.id === 'type-all' && cb.checked) {
+            // 'All' ticked → uncheck all specific types
+            document.querySelectorAll('input[name="type"]').forEach(i => { if (i.id !== 'type-all') i.checked = false; });
+          } else if (cb.checked) {
+            // Specific type ticked → uncheck 'All'
+            const allBtn = document.getElementById('type-all');
+            if (allBtn) allBtn.checked = false;
           }
         }
-        applyFilters(); // Instant update
+        applyFilters();
       });
     });
 
-    // Real-time price display update
-    const priceRange = document.getElementById('priceRange');
-    const priceDisplay = document.getElementById('priceDisplay');
-    if (priceRange && priceDisplay) {
-      priceRange.addEventListener('input', (e) => {
-        const val = parseInt(e.target.value).toLocaleString('en-IN');
-        priceDisplay.textContent = `₹${val}`;
-        applyFilters();
-      });
-    }
-    
-    // Handle URL parameters on load
-    const params = new URLSearchParams(window.location.search);
-    const styleParam = params.get('style');
+    // URL params on load (?type=group, ?style=Adventure)
+    const params    = new URLSearchParams(window.location.search);
     const typeParam = params.get('type');
-    
-    if (styleParam) {
-      const checkbox = document.querySelector(`input[name="style"][value="${styleParam}"]`);
-      if (checkbox) {
-        // Uncheck 'All' type to ensure strict filtering by style
-        const allBtn = document.getElementById('type-all');
-        if (allBtn) allBtn.checked = false;
-        
-        checkbox.checked = true;
-        applyFilters();
-      }
-    }
+    const styleParam= params.get('style');
     if (typeParam) {
-      const checkbox = document.querySelector(`input[name="type"][value="${typeParam}"]`);
-      if (checkbox) {
-        if (typeParam !== 'all') {
-           const allBtn = document.getElementById('type-all');
-           if (allBtn) allBtn.checked = false;
-        }
-        checkbox.checked = true;
+      const cb = document.querySelector(`input[name="type"][value="${typeParam}"]`);
+      if (cb) {
+        const all = document.getElementById('type-all');
+        if (all && typeParam !== 'all') all.checked = false;
+        cb.checked = true;
         applyFilters();
       }
     }
-  } else {
-    console.error("Critical Error: dynamicGrid or tourData not found!");
-  }
+    if (styleParam) {
+      const cb = document.querySelector(`input[name="style"][value="${styleParam}"]`);
+      if (cb) { cb.checked = true; applyFilters(); }
+    }
 
+  } else {
+    if (dynamicGrid) dynamicGrid.innerHTML = '<p style="padding:40px;text-align:center;color:var(--text-muted);">Tour data could not be loaded. Please refresh the page.</p>';
+    console.error('Filter init failed: dynamicGrid=' + !!dynamicGrid + ', tourData=' + !!window.tourData);
+  }
 
   // ---- INTERSECTION OBSERVER (fade-up) ----
   const fadeEls = document.querySelectorAll('.fade-up');
@@ -307,15 +389,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // ---- PRICE RANGE SLIDER ----
-  const priceRange = document.getElementById('priceRange');
-  const priceDisplay = document.getElementById('priceDisplay');
-  if (priceRange && priceDisplay) {
-    priceRange.addEventListener('input', () => {
-      const val = Number(priceRange.value).toLocaleString('en-IN');
-      priceDisplay.textContent = '₹' + val;
-    });
-  }
+  // Price range slider is handled inside the dynamicGrid block above
 
   // ---- ACTIVE NAV LINK ----
   const currentPage = window.location.pathname.split('/').pop();

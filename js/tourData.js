@@ -137,7 +137,10 @@ window.tourData = {
       "National Park fees to be paid locally.",
       "Personal expenses."
     ],
-    price: "₹34,500"
+    price: "₹34,500",
+    category: "international",
+    region: "Southeast Asia",
+    style: "Beach Tours"
   },
   "dubai": {
     title: "Dazzling Dubai Group Tour",
@@ -226,7 +229,10 @@ window.tourData = {
       "Lunches.",
       "Personal expenses."
     ],
-    price: "₹38,000"
+    price: "₹38,000",
+    category: "international",
+    region: "Southeast Asia",
+    style: "Beach Tours"
   },
   "rajasthan": {
     title: "Rajasthan Royal & Desert Tour",
@@ -314,7 +320,10 @@ window.tourData = {
       "Lunches & Dinners.",
       "Personal expenses."
     ],
-    price: "₹42,000"
+    price: "₹42,000",
+    category: "international",
+    region: "Southeast Asia",
+    style: "City Tours"
   },
   "kerala": {
     title: "Kerala Backwaters & Beaches",
@@ -402,7 +411,10 @@ window.tourData = {
       "City taxes (paid directly at hotels).",
       "Lunches and Dinners."
     ],
-    price: "₹1,45,000"
+    price: "₹1,45,000",
+    category: "international",
+    region: "Europe",
+    style: "Adventure"
   },
   "kashmir": {
     title: "Kashmir Valley Paradise",
@@ -443,6 +455,10 @@ window.tourData = {
       "Entry fees to gardens.",
       "Heater charges (if required)."
     ],
+    price: "₹19,999",
+    category: "domestic",
+    region: "North India",
+    style: "Snow Points"
   },
 
   /* ===== DUBAI ===== */
@@ -567,7 +583,10 @@ window.tourData = {
     overviewText: "Thrill rides at Universal Studios, Gardens by the Bay light show, Sentosa Island beaches, and Singapore's iconic hawker food trail.",
     departure: "Singapore (SIN)",
     type: "5 Days / 4 Nights",
-    price: "₹38,000"
+    price: "₹38,000",
+    category: "international",
+    region: "Southeast Asia",
+    style: "City Tours"
   },
   "singapore-cruise": {
     title: "Singapore & Cruise Package",
@@ -576,7 +595,10 @@ window.tourData = {
     overviewText: "Explore vibrant Singapore before hopping onto a luxury cruise departing from Marina Bay — the perfect blend of city and sea.",
     departure: "Singapore (SIN)",
     type: "6 Days / 5 Nights",
-    price: "₹55,000"
+    price: "₹55,000",
+    category: "international",
+    region: "Southeast Asia",
+    style: "Adventure"
   },
   "singapore-malaysia": {
     title: "Singapore & Kuala Lumpur Delight",
@@ -585,7 +607,10 @@ window.tourData = {
     overviewText: "Petronas Towers, Batu Caves, Genting Highlands, Marina Bay Sands, and Universal Studios — two iconic cities in one trip.",
     departure: "Singapore (SIN)",
     type: "7 Days / 6 Nights",
-    price: "₹42,000"
+    price: "₹42,000",
+    category: "international",
+    region: "Southeast Asia",
+    style: "City Tours"
   },
 
   /* ===== JAPAN ===== */
@@ -596,7 +621,10 @@ window.tourData = {
     overviewText: "Futuristic Tokyo meets ancient Kyoto — neon-lit Shibuya, serene Arashiyama bamboo grove, golden Kinkaku-ji, and deer at Nara.",
     departure: "Tokyo (NRT)",
     type: "8 Days / 7 Nights",
-    price: "₹1,15,000"
+    price: "₹1,15,000",
+    category: "international",
+    region: "Southeast Asia",
+    style: "City Tours"
   },
   "japan-osaka": {
     title: "Osaka, Hiroshima & Mount Fuji",
@@ -605,7 +633,10 @@ window.tourData = {
     overviewText: "Street food paradise in Osaka, the moving peace memorial of Hiroshima, and majestic views of Mount Fuji from Hakone.",
     departure: "Osaka (KIX)",
     type: "9 Days / 8 Nights",
-    price: "₹1,25,000"
+    price: "₹1,25,000",
+    category: "international",
+    region: "Southeast Asia",
+    style: "Adventure"
   },
   "japan-cherry": {
     title: "Japan Cherry Blossom Special",
@@ -614,7 +645,10 @@ window.tourData = {
     overviewText: "Witness Japan's most magical season — Sakura in full bloom along rivers, castle moats, and hilltop parks across Tokyo and Kyoto.",
     departure: "Tokyo (NRT)",
     type: "7 Days / 6 Nights",
-    price: "₹1,30,000"
+    price: "₹1,30,000",
+    category: "international",
+    region: "Southeast Asia",
+    style: "Adventure"
   },
 
   /* ===== SWITZERLAND ===== */
@@ -625,7 +659,10 @@ window.tourData = {
     overviewText: "Ride the legendary Glacier Express through the Swiss Alps, see the Matterhorn, and spend nights in charming alpine villages.",
     departure: "Zurich (ZRH)",
     type: "8 Days / 7 Nights",
-    price: "₹1,55,000"
+    price: "₹1,55,000",
+    category: "international",
+    region: "Europe",
+    style: "Adventure"
   },
   "switzerland-lucerne": {
     title: "Lucerne, Interlaken & Zurich Explorer",
@@ -634,7 +671,10 @@ window.tourData = {
     overviewText: "Chapel Bridge reflections, Jungfraujoch Top of Europe, and the pristine lakes of Lucerne — Switzerland at its most scenic.",
     departure: "Zurich (ZRH)",
     type: "7 Days / 6 Nights",
-    price: "₹1,40,000"
+    price: "₹1,40,000",
+    category: "international",
+    region: "Europe",
+    style: "Adventure"
   },
   "switzerland-paris": {
     title: "Switzerland & Paris Escape",
@@ -643,7 +683,10 @@ window.tourData = {
     overviewText: "Eiffel Tower, Louvre Museum, Mt. Titlis snow adventures, and serene Swiss lakes — a dreamy European holiday.",
     departure: "Paris (CDG)",
     type: "9 Days / 8 Nights",
-    price: "₹1,45,000"
+    price: "₹1,45,000",
+    category: "international",
+    region: "Europe",
+    style: "Adventure"
   },
 
   /* ===== ADDITIONAL TOURS FOR VARIETY ===== */
@@ -654,7 +697,10 @@ window.tourData = {
     overviewText: "The ultimate Dubai experience — Dune bashing in the golden sands, BBQ dinner under the stars, and a luxury Dhow cruise along the Marina.",
     departure: "Dubai",
     type: "5 Days / 4 Nights",
-    price: "₹39,999"
+    price: "₹39,999",
+    category: "international",
+    region: "Middle East",
+    style: "Adventure"
   },
   "bali-honeymoon": {
     title: "Bali Luxury Honeymoon – Private Villa Special",
@@ -663,7 +709,10 @@ window.tourData = {
     overviewText: "Celebrate love in the Island of Gods. Includes private pool villas, romantic candle-light dinner on the beach, and relaxing flower baths.",
     departure: "Bali (DPS)",
     type: "7 Days / 6 Nights",
-    price: "₹45,000"
+    price: "₹45,000",
+    category: "international",
+    region: "Southeast Asia",
+    style: "Honeymoon"
   },
   "europe-combo": {
     title: "Switzerland & Italy Scenic Rail Adventure",
@@ -672,7 +721,10 @@ window.tourData = {
     overviewText: "Experience the best of both worlds — snow-capped Swiss mountains and the timeless historical charm of Italy's most famous cities.",
     departure: "Zurich (ZRH)",
     type: "10 Days / 9 Nights",
-    price: "₹1,85,000"
+    price: "₹1,85,000",
+    category: "international",
+    region: "Europe",
+    style: "Adventure"
   },
   "singapore-night": {
     title: "Singapore Night Safari & Bird Paradise",
@@ -681,7 +733,10 @@ window.tourData = {
     overviewText: "Explore the wild side of the Lion City. Visit the world's first nocturnal wildlife park and the stunning new Bird Paradise at Mandai.",
     departure: "Singapore (SIN)",
     type: "4 Days / 3 Nights",
-    price: "₹34,500"
+    price: "₹34,500",
+    category: "international",
+    region: "Southeast Asia",
+    style: "City Tours"
   },
   "japan-winter": {
     title: "Japan Winter Wonderland – Hokkaido Ski",
@@ -690,7 +745,10 @@ window.tourData = {
     overviewText: "Experience the finest powder snow in the world. Ski in Niseko, visit the Otaru canal festivals, and relax in traditional outdoor onsens.",
     departure: "Sapporo (CTS)",
     type: "8 Days / 7 Nights",
-    price: "₹1,50,000"
+    price: "₹1,50,000",
+    category: "international",
+    region: "Southeast Asia",
+    style: "Adventure"
   },
   "switzerland-chocolate": {
     title: "Swiss Chocolate, Cheese & Panoramic Trains",
@@ -699,7 +757,10 @@ window.tourData = {
     overviewText: "A treat for the senses. Visit Gruyères for cheese, Broc for chocolate, and ride the GoldenPass Express through breathtaking valleys.",
     departure: "Geneva (GVA)",
     type: "6 Days / 5 Nights",
-    price: "₹1,28,000"
+    price: "₹1,28,000",
+    category: "international",
+    region: "Europe",
+    style: "Adventure"
   }
 };
 
@@ -718,4 +779,66 @@ if (localData) {
 function saveTourData(updatedData) {
   // Store only the modifications or the full set in localStorage
   localStorage.setItem('adminTourData', JSON.stringify(updatedData));
+}
+
+// ============================================
+// DYNAMIC NAVBAR CATEGORIES (For Dropdowns)
+// ============================================
+window.navCategories = {
+  india: {
+    "South India": [
+      { name: "Karnataka", id: "karnataka" },
+      { name: "Tamil Nadu", id: "tamilnadu" },
+      { name: "Kerala", id: "kerala" },
+      { name: "Andaman", id: "andaman" },
+      { name: "Lakshadweep", id: "lakshadweep" }
+    ],
+    "North India": [
+      { name: "Delhi", id: "delhi" },
+      { name: "Uttar Pradesh", id: "uttarpradesh" },
+      { name: "Himachal Pradesh", id: "himachal" },
+      { name: "Rajasthan", id: "rajasthan" },
+      { name: "Jammu Kashmir", id: "kashmir" }
+    ],
+    "Other Regions": [
+      { name: "North East India", id: "northeast" },
+      { name: "West India (Goa)", id: "goa" },
+      { name: "Central India", id: "central" }
+    ]
+  },
+  international: {
+    "Asia & Far East": [
+      { name: "Sri Lanka", id: "srilanka" },
+      { name: "Maldives", id: "maldives" },
+      { name: "Thailand", id: "thailand" },
+      { name: "Singapore", id: "singapore" },
+      { name: "Bali / Indonesia", id: "bali" }
+    ],
+    "Middle East": [
+      { name: "Dubai / UAE", id: "dubai" },
+      { name: "Egypt", id: "egypt" },
+      { name: "Turkey", id: "turkey" },
+      { name: "Uzbekistan", id: "uzbekistan" }
+    ],
+    "Other": [
+      { name: "Europe", id: "europe" },
+      { name: "Switzerland", id: "switzerland" },
+      { name: "USA / America", id: "usa" },
+      { name: "Australia & NZ", id: "australia" }
+    ]
+  }
+};
+
+const localCats = localStorage.getItem('adminNavCategories');
+if (localCats) {
+  try {
+    window.navCategories = JSON.parse(localCats);
+  } catch (e) {
+    console.error("Error parsing adminNavCategories", e);
+  }
+}
+
+function saveNavCategories(data) {
+  window.navCategories = data;
+  localStorage.setItem('adminNavCategories', JSON.stringify(data));
 }

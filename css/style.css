@@ -142,22 +142,31 @@ ul { list-style: none; }
   top: 0; left: 0; right: 0;
   z-index: 1000;
   padding: 0 24px;
-  background: transparent;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  /* Glassmorphic dark gradient — blends with dark AND light backgrounds */
+  background: linear-gradient(180deg, rgba(10,25,45,0.72) 0%, rgba(10,25,45,0.45) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* When page is scrolled — switch to clean solid white */
 .navbar.scrolled {
-  background: var(--white);
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
   padding: 8px 24px;
-  border-bottom: none;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
 }
 
-/* Link colors based on navbar state */
-.navbar .nav-link { color: rgba(255,255,255,0.85); }
+/* Link colors — white on transparent, dark on scrolled */
+.navbar .nav-link { color: rgba(255,255,255,0.9); }
 .navbar.scrolled .nav-link { color: var(--text); }
-.navbar .nav-link:hover, .navbar .nav-link.active { color: var(--accent); }
-.navbar.scrolled .nav-link:hover, .navbar.scrolled .nav-link.active { color: var(--accent); }
+.navbar .nav-link:hover,
+.navbar .nav-link.active { color: var(--accent); }
+.navbar.scrolled .nav-link:hover,
+.navbar.scrolled .nav-link.active { color: var(--accent); }
 .nav-inner {
   max-width: 1240px;
   margin: 0 auto;
@@ -175,7 +184,7 @@ ul { list-style: none; }
   height: 65px;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.15)) brightness(0) invert(1);
   transition: var(--transition);
 }
 .navbar.scrolled .nav-logo-img {
@@ -368,7 +377,7 @@ ul { list-style: none; }
 .nav-hamburger span {
   display: block;
   width: 24px; height: 2px;
-  background: var(--white);
+  background: rgba(255,255,255,0.9);
   border-radius: 2px;
   transition: var(--transition);
 }

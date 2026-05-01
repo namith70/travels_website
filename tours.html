@@ -178,10 +178,10 @@
 
         <div class="filter-group">
           <h4>Budget (per person)</h4>
-          <input type="range" id="priceRange" min="5000" max="200000" value="100000" step="1000" />
+          <input type="range" id="priceRange" min="5000" max="200000" value="200000" step="1000" />
           <div class="price-labels">
             <span>₹5,000</span>
-            <span id="priceDisplay">₹1,00,000</span>
+            <span id="priceDisplay">₹2,00,000</span>
           </div>
         </div>
 
@@ -198,7 +198,8 @@
           <label class="filter-option"><input type="checkbox" name="style" value="City Tours" /> <span>City Tours</span></label>
         </div>
 
-        <button class="btn btn-primary" id="applyFiltersBtn" style="width:100%;">Apply Filters</button>
+        <button class="btn btn-primary" id="applyFiltersBtn" style="width:100%; margin-bottom:10px;">Apply Filters</button>
+        <button class="btn btn-outline" onclick="window.resetFilters && window.resetFilters()" style="width:100%; background:transparent;">↺ Reset Filters</button>
       </aside>
 
       <!-- Main Packages Grid -->
