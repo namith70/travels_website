@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard – Travel Horizon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/admin.css" />
+</head>
+
+<body class="admin-body">
+
+  <aside class="admin-sidebar">
+    <a href="index.html" class="nav-logo">
+      <img src="travel_logo.png?v=2" alt="Travel Horizon Logo" class="nav-logo-img">
+    </a>
+    <ul class="admin-nav">
+      <li><a href="admin.html" class="active">📦 Tour Packages</a></li>
+      <li><a href="index.html">🌐 View Site</a></li>
+    </ul>
+  </aside>
+
+  <main class="admin-main">
+    <header class="admin-header">
+      <h1>Manage Tour Packages</h1>
+      <button class="btn btn-primary" onclick="openPackageModal()">+ Add New Package</button>
+    </header>
+
+    <div class="admin-content">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="packageTableBody">
+          <!-- Dynamic rows go here -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <!-- Modal for Add/Edit Package -->
+  <div class="admin-modal" id="packageModal">
+    <div class="admin-modal-content">
+      <div class="admin-modal-header">
+        <h3 id="modalTitle">Add/Edit Package</h3>
+        <button class="close-btn" onclick="closePackageModal()">✕</button>
+      </div>
+      <form id="packageForm">
+        <input type="hidden" id="pkgId" />
+        <div class="form-sections" style="padding: 24px; overflow-y: auto; flex: 1;">
+
+          <h4
+            style="margin-top:0; margin-bottom:16px; font-family:'Playfair Display', serif; color:var(--primary); font-size:1.2rem;">
+            Basic Info</h4>
+          <div class="form-grid" style="padding:0; overflow:visible;">
+            <div class="form-group">
+              <label>Package ID (slug, e.g. goa-special)</label>
+              <input type="text" id="pkgSlug" required />
+            </div>
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" id="pkgTitle" required />
+            </div>
+            <div class="form-group">
+              <label>Price (e.g. ₹20,000)</label>
+              <input type="text" id="pkgPrice" required />
+            </div>
+            <div class="form-group">
+              <label>Meta Details (e.g. 🗓 4N 5D • Delhi · Agra)</label>
+              <input type="text" id="pkgMeta" required />
+            </div>
+            <div class="form-group">
+              <label>Departure City</label>
+              <input type="text" id="pkgDeparture" />
+            </div>
+            <div class="form-group">
+              <label>Category (for filtering, e.g. domestic, international, group)</label>
+              <input type="text" id="pkgCategory" value="domestic" />
+            </div>
+            <div class="form-group">
+              <label>Nights (e.g. Delhi 1N, Agra 1N)</label>
+              <input type="text" id="pkgNights" required />
+            </div>
+            <div class="form-group">
+              <label>Type (e.g. 5 Days / 4 Nights)</label>
+              <input type="text" id="pkgType" required />
+            </div>
+            <div class="form-group full-width">
+              <label>Hero Image URL</label>
+              <input type="url" id="pkgImage" required />
+            </div>
+            <div class="form-group full-width">
+              <label>Overview Text</label>
+              <textarea id="pkgOverview" rows="3" required></textarea>
+            </div>
+          </div>
+
+          <hr style="margin:32px 0; border:0; border-top:1px solid #eee;" />
+
+          <h4
+            style="margin-top:0; margin-bottom:16px; font-family:'Playfair Display', serif; color:var(--primary); font-size:1.2rem;">
+            Expectations & Suggestions</h4>
+          <div class="dynamic-list-section">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <h4 style="margin:0;">What to Expect</h4>
+              <button type="button" class="btn btn-outline" style="padding:4px 12px; font-size:0.85rem;"
+                onclick="addListStringItem('expectList')">+ Add Expectation</button>
+            </div>
+            <div id="expectList" class="dynamic-string-list"></div>
+          </div>
+
+          <hr style="margin:24px 0; border:0; border-top:1px solid #eee;" />
+
+          <div class="dynamic-list-section">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <h4 style="margin:0;">Suggestions</h4>
+              <button type="button" class="btn btn-outline" style="padding:4px 12px; font-size:0.85rem;"
+                onclick="addListStringItem('suggestionsList')">+ Add Suggestion</button>
+            </div>
+            <div id="suggestionsList" class="dynamic-string-list"></div>
+          </div>
+
+          <hr style="margin:32px 0; border:0; border-top:1px solid #eee;" />
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h4 style="margin:0; font-family:'Playfair Display', serif; color:var(--primary); font-size:1.2rem;">
+              Itinerary Days</h4>
+            <button type="button" class="btn btn-outline" style="padding:4px 12px; font-size:0.85rem;"
+              onclick="addItineraryDay()">+ Add Day</button>
+          </div>
+          <div id="itineraryList"></div>
+
+          <hr style="margin:32px 0; border:0; border-top:1px solid #eee;" />
+
+          <h4
+            style="margin-top:0; margin-bottom:16px; font-family:'Playfair Display', serif; color:var(--primary); font-size:1.2rem;">
+            Inclusions & Exclusions</h4>
+          <div class="dynamic-list-section">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <h4 style="margin:0;">Inclusions</h4>
+              <button type="button" class="btn btn-outline" style="padding:4px 12px; font-size:0.85rem;"
+                onclick="addListStringItem('inclusionsList')">+ Add Inclusion</button>
+            </div>
+            <div id="inclusionsList" class="dynamic-string-list"></div>
+          </div>
+
+          <hr style="margin:24px 0; border:0; border-top:1px solid #eee;" />
+
+          <div class="dynamic-list-section">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+              <h4 style="margin:0;">Exclusions</h4>
+              <button type="button" class="btn btn-outline" style="padding:4px 12px; font-size:0.85rem;"
+                onclick="addListStringItem('exclusionsList')">+ Add Exclusion</button>
+            </div>
+            <div id="exclusionsList" class="dynamic-string-list"></div>
+          </div>
+
+          <hr style="margin:32px 0; border:0; border-top:1px solid #eee;" />
+
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <h4 style="margin:0; font-family:'Playfair Display', serif; color:var(--primary); font-size:1.2rem;">
+              Frequently Asked Questions</h4>
+            <button type="button" class="btn btn-outline" style="padding:4px 12px; font-size:0.85rem;"
+              onclick="addFAQ()">+ Add FAQ</button>
+          </div>
+          <div id="faqList"></div>
+
+        </div>
+        <div class="admin-modal-footer">
+          <button type="button" class="btn btn-outline" onclick="closePackageModal()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Save Package</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/tourData.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+
+</html>
