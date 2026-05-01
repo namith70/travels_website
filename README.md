@@ -11,7 +11,10 @@ travel-agency/
 │
 ├── index.html          → Homepage (Hero, Destinations, Packages, Testimonials)
 ├── tours.html          → Tour Packages with Filters & Sorting
+├── destination-tours.html → Dynamic Destination Page with Routing
 ├── contact.html        → Contact Form, Visa Services, FAQ
+├── terms.html          → Terms & Refund Policy
+├── admin.html          → Simple Admin Dashboard
 │
 ├── css/
 │   └── style.css       → Full stylesheet (variables, components, responsive)
@@ -47,6 +50,12 @@ travel-agency/
 - Customer testimonials grid
 - Newsletter signup
 
+### Dynamic Destination Page (destination-tours.html)
+- Dynamic routing via URL parameters (e.g. `?dest=kerala`)
+- Custom hero images for each destination
+- 4+ curated tour packages per location (India & International)
+- High-quality imagery for all destinations
+
 ### Tours Page (tours.html)
 - Sidebar filter (tour type, duration, region, budget slider, travel style)
 - Package grid with badge labels (Recommended / Group Tour / Sale)
@@ -81,21 +90,9 @@ Edit CSS variables at the top of `css/style.css`:
 - Replace `hello@travelhorizon.in` with your email
 
 ### Add Real Images
-Replace the gradient placeholder divs with `<img>` tags:
+The project now uses high-quality images for many sections. To add your own:
 ```html
-<!-- Replace this: -->
-<div class="pkg-placeholder pp-1" style="height:100%;...">🌆</div>
-
-<!-- With this: -->
 <img src="images/your-tour.jpg" alt="Tour Name" class="pkg-img" />
-```
-
-### Connect Contact Form
-The form in `contact.html` currently shows a success message on submit.
-To send real emails, use a service like **Formspree**:
-
-```html
-<form action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
 ```
 
 ---
@@ -109,8 +106,8 @@ To send real emails, use a service like **Formspree**:
 
 ### Option 2 – GitHub Pages
 1. Upload files to a GitHub repository
-2. Go to Settings → Pages → select `main` branch
-3. Your site will be at `https://yourusername.github.io/travel-agency/`
+2. Go to Settings → Pages → select `namith` branch
+3. Your site will be at `https://yourusername.github.io/travels_website/`
 
 ---
 
