@@ -1,4 +1,4 @@
-let tourData = {
+window.tourData = {
   "golden-triangle": {
     title: "Golden Triangle Tour with Mathura",
     meta: "🗓 4N 5D • Delhi · Mathura · Agra · Jaipur",
@@ -44,7 +44,10 @@ let tourData = {
       { q: "How long does it take from Delhi to Agra via Mathura?", a: "The journey takes approximately 5–6 hours including sightseeing in Mathura and Vrindavan. Travel Comfort ensures well-paced travel for a comfortable experience." },
       { q: "Can I customize this Golden Triangle Tour?", a: "Absolutely! Travel Horizon offers fully customizable itineraries—you can add Ranthambore, Pushkar, or Udaipur, or spend an extra day in Vrindavan for temple festivals." }
     ],
-    price: "₹18,500"
+    price: "₹18,500",
+    category: "domestic",
+    region: "North India",
+    style: "Temple Circuits"
   },
   "himachal": {
     title: "Himachal Special Getaway",
@@ -88,7 +91,10 @@ let tourData = {
       "Meals other than specified.",
       "Rohtang Pass permit and taxi charges."
     ],
-    price: "₹19,999"
+    price: "₹19,999",
+    category: "domestic",
+    region: "North India",
+    style: "Hill Stations"
   },
   "bangkok": {
     title: "Bangkok Phuket Krabi Grand Tour",
@@ -174,7 +180,10 @@ let tourData = {
       "Lunches and dinners not specified.",
       "Personal expenses."
     ],
-    price: "₹45,999"
+    price: "₹45,999",
+    category: "group",
+    region: "Middle East",
+    style: "Adventure"
   },
   "srilanka": {
     title: "Grand Sri Lanka Discovery",
@@ -260,7 +269,10 @@ let tourData = {
       "Boat ride charges.",
       "Personal expenses."
     ],
-    price: "₹28,500"
+    price: "₹28,500",
+    category: "domestic",
+    region: "North India",
+    style: "Adventure"
   },
   "singapore": {
     title: "Singapore & Malaysia Delight",
@@ -343,7 +355,10 @@ let tourData = {
       "Ayurveda treatments.",
       "Personal expenses."
     ],
-    price: "₹22,500"
+    price: "₹22,500",
+    category: "domestic",
+    region: "South India",
+    style: "Beach Tours"
   },
   "switzerland": {
     title: "Switzerland & Paris Escape",
@@ -438,7 +453,10 @@ let tourData = {
     overviewText: "Combine the glitter of Dubai with the grandeur of Abu Dhabi's Yas Island. Visit Ferrari World, Warner Bros. World, and the iconic Sheikh Zayed Mosque.",
     departure: "Dubai",
     type: "6 Days / 5 Nights",
-    price: "₹48,999"
+    price: "₹48,999",
+    category: "international",
+    region: "Middle East",
+    style: "Adventure"
   },
   "dubai-ferrari": {
     title: "Magical Dubai With Ferrari World",
@@ -447,7 +465,10 @@ let tourData = {
     overviewText: "Speed, luxury and desert magic in one tour. Includes Ferrari World Abu Dhabi, Burj Khalifa, and a Golden Desert Safari.",
     departure: "Dubai",
     type: "6 Days / 5 Nights",
-    price: "₹52,500"
+    price: "₹52,500",
+    category: "international",
+    region: "Middle East",
+    style: "Adventure"
   },
   "dubai-luxury": {
     title: "Dubai With Abu Dhabi Tour",
@@ -456,7 +477,10 @@ let tourData = {
     overviewText: "Explore the best of the UAE — Burj Khalifa, Palm Jumeirah, Miracle Garden, Marina Dhow Cruise, and the stunning Grand Mosque.",
     departure: "Dubai",
     type: "6 Days / 5 Nights",
-    price: "₹44,500"
+    price: "₹44,500",
+    category: "international",
+    region: "Middle East",
+    style: "Adventure"
   },
 
   /* ===== BALI ===== */
@@ -467,7 +491,10 @@ let tourData = {
     overviewText: "Discover lush rice terraces, traditional temples, and vibrant nightlife in Bali's most beloved regions.",
     departure: "Bali (DPS)",
     type: "6 Days / 5 Nights",
-    price: "₹32,000"
+    price: "₹32,000",
+    category: "international",
+    region: "Southeast Asia",
+    style: "Beach Tours"
   },
   "bali-nusa-penida": {
     title: "Bali & Nusa Penida Adventure",
@@ -476,7 +503,10 @@ let tourData = {
     overviewText: "Combine Bali's cultural heart with the raw beauty of Nusa Penida — cliffside viewpoints, crystal-clear snorkelling bays, and hidden beaches.",
     departure: "Bali (DPS)",
     type: "7 Days / 6 Nights",
-    price: "₹36,500"
+    price: "₹36,500",
+    category: "international",
+    region: "Southeast Asia",
+    style: "Adventure"
   },
   "bali-uluwatu": {
     title: "Bali Uluwatu Beaches & Temples",
@@ -485,7 +515,10 @@ let tourData = {
     overviewText: "Clifftop temples, world-class surf beaches, fresh seafood by the ocean, and the famous Kecak fire dance at Uluwatu.",
     departure: "Bali (DPS)",
     type: "5 Days / 4 Nights",
-    price: "₹27,999"
+    price: "₹27,999",
+    category: "international",
+    region: "Southeast Asia",
+    style: "Temple Circuits"
   },
 
   /* ===== EUROPE ===== */
@@ -496,7 +529,10 @@ let tourData = {
     overviewText: "From the Eiffel Tower to the glamour of Monaco — a classic European journey through the finest cities of France.",
     departure: "Paris (CDG)",
     type: "8 Days / 7 Nights",
-    price: "₹1,20,000"
+    price: "₹1,20,000",
+    category: "international",
+    region: "Europe",
+    style: "Adventure"
   },
   "europe-italy": {
     title: "Italy Grand Tour – Rome, Florence & Venice",
@@ -505,7 +541,10 @@ let tourData = {
     overviewText: "Walk the ancient streets of Rome, admire Renaissance art in Florence, and glide through the canals of Venice.",
     departure: "Rome (FCO)",
     type: "9 Days / 8 Nights",
-    price: "₹1,35,000"
+    price: "₹1,35,000",
+    category: "international",
+    region: "Europe",
+    style: "Adventure"
   },
   "europe-greece": {
     title: "Greek Islands & Athens Odyssey",
@@ -514,7 +553,10 @@ let tourData = {
     overviewText: "Iconic whitewashed villages, turquoise Aegean waters, ancient ruins, and spectacular sunsets in Santorini.",
     departure: "Athens (ATH)",
     type: "8 Days / 7 Nights",
-    price: "₹1,10,000"
+    price: "₹1,10,000",
+    category: "international",
+    region: "Europe",
+    style: "Beach Tours"
   },
 
   /* ===== SINGAPORE ===== */
