@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact & Visa Services – Travel Horizon</title>
+  <meta name="description" content="Get in touch with Travel Horizon for custom tour packages, visa services, and travel assistance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Lora:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=2" />
+
+  <style>
+    .visa-section { background: var(--white); }
+    .visa-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .visa-card {
+      text-align: center;
+      padding: 28px 16px;
+      background: var(--off-white);
+      border-radius: var(--radius);
+      transition: var(--transition);
+      cursor: pointer;
+    }
+    .visa-card:hover {
+      background: var(--primary);
+      color: var(--white);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+    .visa-card:hover .visa-country { color: var(--white); }
+    .visa-flag { font-size: 36px; margin-bottom: 10px; }
+    .visa-country {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .visa-time {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+    .visa-card:hover .visa-time { color: rgba(255,255,255,0.7); }
+
+    .map-section { background: var(--off-white); }
+    .map-placeholder {
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, #2a5470 100%);
+      border-radius: var(--radius);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+      gap: 16px;
+    }
+    .map-placeholder p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      opacity: 0.8;
+    }
+    .map-placeholder a {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    .faq-section { background: var(--white); }
+    .faq-list { max-width: 780px; margin: 0 auto; }
+    .faq-item {
+      border: 1px solid var(--light-gray);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .faq-question {
+      padding: 20px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--primary);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--off-white);
+      transition: var(--transition);
+    }
+    .faq-question:hover { background: var(--light-gray); }
+    .faq-question .arrow { transition: var(--transition); font-size: 12px; }
+    .faq-item.open .faq-question { background: var(--primary); color: var(--white); }
+    .faq-item.open .arrow { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.35s ease;
+    }
+    .faq-item.open .faq-answer { max-height: 200px; }
+    .faq-answer-inner {
+      padding: 20px 24px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="travel_logo.png?v=2" alt="Travel Horizon Logo" class="nav-logo-img">
+    </a>
+    <ul class="nav-links">
+      <li class="nav-item">
+        <a href="index.html" class="nav-link">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="tours.html" class="nav-link">India ▾</a>
+        <div class="mega-dropdown">
+          <div class="mega-col">
+            <div class="mega-title">South India</div>
+            <a href="tours.html">Karnataka</a>
+            <a href="tours.html">Tamil Nadu</a>
+            <a href="tours.html">Kerala</a>
+            <a href="tours.html">Andaman</a>
+            <a href="tours.html">Lakshadweep</a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-title">North India</div>
+            <a href="tours.html">Delhi</a>
+            <a href="tours.html">Uttar Pradesh</a>
+            <a href="tours.html">Himachal Pradesh</a>
+            <a href="tours.html">Rajasthan</a>
+            <a href="tours.html">Jammu Kashmir</a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-title">Other Regions</div>
+            <a href="tours.html">North East India</a>
+            <a href="tours.html">West India (Goa)</a>
+            <a href="tours.html">Central India</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="tours.html" class="nav-link">International ▾</a>
+        <div class="mega-dropdown">
+          <div class="mega-col">
+            <div class="mega-title">Asia & Far East</div>
+            <a href="tours.html">Sri Lanka</a>
+            <a href="tours.html">Maldives</a>
+            <a href="tours.html">Thailand</a>
+            <a href="tours.html">Singapore</a>
+            <a href="tours.html">Bali / Indonesia</a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-title">Middle East</div>
+            <a href="tours.html">Dubai / UAE</a>
+            <a href="tours.html">Egypt</a>
+            <a href="tours.html">Turkey</a>
+            <a href="tours.html">Uzbekistan</a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-title">Other</div>
+            <a href="tours.html">Europe</a>
+            <a href="tours.html">Switzerland</a>
+            <a href="tours.html">USA / America</a>
+            <a href="tours.html">Australia & NZ</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="tours.html" class="nav-link">Group Tours</a>
+      </li>
+      <li class="nav-item">
+        <a href="tours.html" class="nav-link">Popular Tours ▾</a>
+        <div class="mega-dropdown">
+          <div class="mega-col">
+            <div class="mega-title">Hill Station</div>
+            <a href="tours.html">Coorg</a>
+            <a href="tours.html">Ooty</a>
+            <a href="tours.html">Munnar</a>
+            <a href="tours.html">Mahabaleshwar</a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-title">Snow & Beach</div>
+            <a href="tours.html">Shimla & Manali</a>
+            <a href="tours.html">Kashmir</a>
+            <a href="tours.html">Goa</a>
+            <a href="tours.html">Pondicherry</a>
+          </div>
+          <div class="mega-col">
+            <div class="mega-title">Pilgrimage & Weekend</div>
+            <a href="tours.html">Shirdi</a>
+            <a href="tours.html">Vaishno Devi</a>
+            <a href="tours.html">Chardham Yatra</a>
+            <a href="tours.html">Around Bangalore</a>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="contact.html" class="nav-link active">Visa & Contact</a>
+      </li>
+    </ul>
+    <a href="tel:+919876543210" class="btn btn-primary nav-cta">📞 +91 98765 43210</a>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<div class="mobile-nav" id="mobileNav">
+  <button id="mobileClose" style="position:absolute;top:28px;right:28px;background:none;border:none;color:white;font-size:2rem;cursor:pointer;">✕</button>
+  <div class="mobile-nav-links">
+    <a href="index.html">Home</a>
+    <a href="tours.html">Packages</a>
+    <a href="contact.html">Contact</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="section-label">📬 Get In Touch</div>
+    <h1>Contact & Visa Services</h1>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> › <span>Contact Us</span>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT SECTION -->
+<section class="contact-section section-pad">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Contact Info -->
+      <div class="contact-info-card fade-up">
+        <h3>Let's Plan Your Trip 🗺️</h3>
+        <p>Our travel experts are ready to craft the perfect holiday for you. Reach out and we'll get back to you within a few hours.</p>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24" fill="currentColor" style="width:1em;height:1em;vertical-align:middle;color:var(--accent);"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+          <div>
+            <h5>Phone / WhatsApp</h5>
+            <p>+91 98765 43210</p>
+            <p>+91 80 4567 8900</p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24" fill="currentColor" style="width:1em;height:1em;vertical-align:middle;color:var(--accent);"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+          <div>
+            <h5>Email</h5>
+            <p>hello@travelhorizon.in</p>
+            <p>support@travelhorizon.in</p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24" fill="currentColor" style="width:1em;height:1em;vertical-align:middle;color:var(--accent);"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+          <div>
+            <h5>Office Address</h5>
+            <p>12, MG Road, Near Trinity Circle,<br>Bangalore – 560 001, Karnataka</p>
+          </div>
+        </div>
+
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><svg viewBox="0 0 24 24" fill="currentColor" style="width:1em;height:1em;vertical-align:middle;color:var(--accent);"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg></div>
+          <div>
+            <h5>Working Hours</h5>
+            <p>Mon–Sat: 9:00 AM – 7:00 PM</p>
+            <p>Sunday: 10:00 AM – 4:00 PM</p>
+          </div>
+        </div>
+
+        <div style="margin-top:32px;">
+          <p style="font-family:'DM Sans',sans-serif;font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:12px;letter-spacing:1.5px;text-transform:uppercase;">Follow Us</p>
+          <div class="social-links">
+            <a class="social-link" href="#">📘</a>
+            <a class="social-link" href="#">📸</a>
+            <a class="social-link" href="#">▶️</a>
+            <a class="social-link" href="#">💬</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form-card fade-up fade-up-delay-1">
+        <h3>Send Us a Message</h3>
+        <p>Fill in the form and our team will reach out to plan your perfect holiday.</p>
+
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name *</label>
+              <input type="text" placeholder="Ravi" required />
+            </div>
+            <div class="form-group">
+              <label>Last Name *</label>
+              <input type="text" placeholder="Kumar" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Email Address *</label>
+              <input type="email" placeholder="ravi@example.com" required />
+            </div>
+            <div class="form-group">
+              <label>Phone Number *</label>
+              <input type="tel" placeholder="+91 98765 43210" required />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Interested In</label>
+              <select>
+                <option value="">Select Package Type</option>
+                <option>Domestic Tour</option>
+                <option>International Tour</option>
+                <option>Group Tour</option>
+                <option>Honeymoon Package</option>
+                <option>Family Package</option>
+                <option>Weekend Getaway</option>
+                <option>Visa Services</option>
+                <option>Cab Booking</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Travel Date</label>
+              <input type="month" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Destination</label>
+              <input type="text" placeholder="e.g. Kerala, Dubai, Thailand..." />
+            </div>
+            <div class="form-group">
+              <label>No. of Travellers</label>
+              <select>
+                <option>1 Person</option>
+                <option>2 Persons</option>
+                <option>3-5 Persons</option>
+                <option>6-10 Persons</option>
+                <option>10+ Persons</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Message / Special Requirements</label>
+            <textarea placeholder="Tell us about your dream trip, budget, or any special requests..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;font-size:16px;padding:16px;">
+            ✉️ Send My Enquiry
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VISA SERVICES -->
+<section class="visa-section section-pad">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">🛂 Visa Assistance</span>
+      <h2 class="section-title">Visa Services We Offer</h2>
+      <p class="section-sub">We assist with visa applications for 30+ countries. Quick processing, expert guidance, and end-to-end support.</p>
+    </div>
+
+    <div class="visa-grid">
+      <div class="visa-card fade-up"><div class="visa-flag">🇦🇪</div><div class="visa-country">UAE / Dubai</div><div class="visa-time">3-5 working days</div></div>
+      <div class="visa-card fade-up"><div class="visa-flag">🇹🇭</div><div class="visa-country">Thailand</div><div class="visa-time">On arrival</div></div>
+      <div class="visa-card fade-up"><div class="visa-flag">🇸🇬</div><div class="visa-country">Singapore</div><div class="visa-time">5-7 working days</div></div>
+      <div class="visa-card fade-up"><div class="visa-flag">🇲🇾</div><div class="visa-country">Malaysia</div><div class="visa-time">3-5 working days</div></div>
+      <div class="visa-card fade-up"><div class="visa-flag">🇮🇩</div><div class="visa-country">Indonesia (Bali)</div><div class="visa-time">On arrival</div></div>
+      <div class="visa-card fade-up"><div class="visa-flag">🇯🇵</div><div class="visa-country">Japan</div><div class="visa-time">7-10 working days</div></div>
+      <div class="visa-card fade-up"><div class="visa-flag">🇦🇺</div><div class="visa-country">Australia</div><div class="visa-time">15-20 working days</div></div>
+      <div class="visa-card fade-up"><div class="visa-flag">🇬🇧</div><div class="visa-country">United Kingdom</div><div class="visa-time">15-20 working days</div></div>
+      <div class="visa-card fade-up"><div class="visa-flag">🇺🇸</div><div class="visa-country">USA</div><div class="visa-time">30-45 working days</div></div>
+      <div class="visa-card fade-up"><div class="visa-flag">🇨🇦</div><div class="visa-country">Canada</div><div class="visa-time">20-30 working days</div></div>
+      <div class="visa-card fade-up"><div class="visa-flag">🇨🇭</div><div class="visa-country">Switzerland</div><div class="visa-time">10-15 working days</div></div>
+      <div class="visa-card fade-up"><div class="visa-flag">🇳🇿</div><div class="visa-country">New Zealand</div><div class="visa-time">15-20 working days</div></div>
+    </div>
+
+    <div style="text-align:center;margin-top:40px;" class="fade-up">
+      <p style="font-family:'DM Sans',sans-serif;color:var(--text-muted);margin-bottom:20px;">Don't see your destination? We cover 30+ countries. Contact us for more info.</p>
+      <a href="#contactForm" class="btn btn-primary">Apply for Visa →</a>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section section-pad-sm">
+  <div class="container">
+    <div class="map-placeholder fade-up">
+      <span>📍</span>
+      <p>Travel Horizon – 12, MG Road, Bangalore 560001</p>
+      <p style="font-size:14px;"><a href="https://maps.google.com" target="_blank">Open in Google Maps →</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section section-pad">
+  <div class="container">
+    <div class="section-header fade-up">
+      <span class="section-label">❓ FAQ</span>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item fade-up">
+        <div class="faq-question">How do I book a tour package? <span class="arrow">▼</span></div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">You can book by filling out our enquiry form, calling us at +91 98765 43210, or visiting our office. Our travel expert will get in touch, understand your preferences, and share a customised itinerary with pricing. Once confirmed, a 25% advance secures your booking.</div>
+        </div>
+      </div>
+      <div class="faq-item fade-up fade-up-delay-1">
+        <div class="faq-question">What is your cancellation policy? <span class="arrow">▼</span></div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Cancellations made 30+ days before travel receive an 80% refund. 15-30 days: 50% refund. Less than 15 days: no refund. Group tours may have different policies. Please read the terms on the booking confirmation for full details.</div>
+        </div>
+      </div>
+      <div class="faq-item fade-up fade-up-delay-2">
+        <div class="faq-question">Do you offer customized itineraries? <span class="arrow">▼</span></div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Absolutely! All our packages can be fully customized. Just let us know your preferred destinations, budget, travel dates, and travel style — and we'll craft a bespoke itinerary just for you.</div>
+        </div>
+      </div>
+      <div class="faq-item fade-up">
+        <div class="faq-question">How long does visa processing take? <span class="arrow">▼</span></div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Visa processing times vary by country. Some like Thailand and Bali offer visa on arrival. UAE and Singapore take 3-7 working days. UK, USA, and Australia can take 15-45 working days. We recommend applying well in advance.</div>
+        </div>
+      </div>
+      <div class="faq-item fade-up fade-up-delay-1">
+        <div class="faq-question">Are flights included in your packages? <span class="arrow">▼</span></div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Most packages are quoted without airfare unless explicitly mentioned. We can assist with flight bookings at competitive rates. International packages often include flight options — please check the specific package details or ask our team.</div>
+        </div>
+      </div>
+      <div class="faq-item fade-up fade-up-delay-2">
+        <div class="faq-question">Do you provide travel insurance? <span class="arrow">▼</span></div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">We strongly recommend travel insurance for all trips, especially international ones. We can assist in getting you covered through our trusted insurance partners. Please ask our team for options and pricing.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="nav-logo">
+          <img src="travel_logo.png?v=2" alt="Travel Horizon Logo" class="nav-logo-img">
+        </div>
+        <p class="footer-desc">Trusted tours and travel agency since 2007. Govt. of India approved, MSME & KSTDC certified.</p>
+        <div class="footer-contact-item"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor" style="width:1em;height:1em;vertical-align:middle;color:var(--accent);"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></span> +91 98765 43210</div>
+        <div class="footer-contact-item"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor" style="width:1em;height:1em;vertical-align:middle;color:var(--accent);"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></span> hello@travelhorizon.in</div>
+        <div class="footer-contact-item"><span class="icon"><svg viewBox="0 0 24 24" fill="currentColor" style="width:1em;height:1em;vertical-align:middle;color:var(--accent);"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></span> MG Road, Bangalore – 560001</div>
+      </div>
+      <div class="footer-col">
+        <h4>India Tours</h4>
+        <ul class="footer-links">
+          <li><a href="tours.html">→ Kerala</a></li>
+          <li><a href="tours.html">→ Rajasthan</a></li>
+          <li><a href="tours.html">→ Kashmir</a></li>
+          <li><a href="tours.html">→ Himachal Pradesh</a></li>
+          <li><a href="tours.html">→ Goa</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>International</h4>
+        <ul class="footer-links">
+          <li><a href="tours.html">→ Thailand</a></li>
+          <li><a href="tours.html">→ Singapore</a></li>
+          <li><a href="tours.html">→ Dubai</a></li>
+          <li><a href="tours.html">→ Europe</a></li>
+          <li><a href="tours.html">→ Sri Lanka</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Quick Links</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">→ Home</a></li>
+          <li><a href="tours.html">→ All Packages</a></li>
+          <li><a href="contact.html">→ Visa Services</a></li>
+          <li><a href="contact.html">→ Contact Us</a></li>
+          <li><a href="terms.html">→ Terms & Conditions</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Travel Horizon Tours & Travels. All Rights Reserved.</p>
+      <div class="social-links">
+        <a class="social-link" href="https://facebook.com" target="_blank">📘</a>
+        <a class="social-link" href="https://instagram.com" target="_blank">📸</a>
+        <a class="social-link" href="https://youtube.com" target="_blank">▶️</a>
+        <a class="social-link" href="https://wa.me/919876543210" target="_blank">💬</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="back-to-top" id="backToTop">↑</div>
+
+<script src="js/main.js"></script>
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-question').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      const wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!wasOpen) item.classList.add('open');
+    });
+  });
+</script>
+</body>
+</html>

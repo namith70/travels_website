@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="pageTitle">Destination Tours – Travel Horizon</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ===== HERO ===== */
+    .dh-hero {
+      height: 52vh;
+      min-height: 340px;
+      background: url('https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1600&q=80') center/cover no-repeat;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dh-hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,.65) 100%);
+    }
+    .dh-hero-text {
+      position: relative; z-index: 3;
+      text-align: center; color: #fff;
+      padding: 0 20px;
+    }
+    .dh-hero-label {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #f5b942;
+      margin-bottom: 14px;
+    }
+    .dh-hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    /* ===== GRID SECTION ===== */
+    .dh-section {
+      background: #f5f3ee;
+      padding: 60px 0 100px;
+      min-height: 350px;
+    }
+    .dh-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .dh-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: #1a3a4f;
+      margin-bottom: 36px;
+    }
+    .dh-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 28px;
+    }
+
+    /* ===== CARD ===== */
+    .dh-card {
+      background: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 3px 16px rgba(0,0,0,.08);
+      transition: transform .28s ease, box-shadow .28s ease;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .dh-card:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 14px 44px rgba(0,0,0,.14);
+    }
+    .dh-card-thumb {
+      width: 100%; height: 210px;
+      overflow: hidden;
+    }
+    .dh-card-thumb img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .45s ease;
+    }
+    .dh-card:hover .dh-card-thumb img { transform: scale(1.07); }
+    .dh-card-body { padding: 18px 20px 22px; }
+    .dh-card-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .98rem;
+      font-weight: 600;
+      color: #1a3a4f;
+      line-height: 1.4;
+      min-height: 2.8em;
+      margin-bottom: 14px;
+    }
+    .dh-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: #666;
+      margin-bottom: 7px;
+    }
+    .dh-card-meta svg {
+      width: 15px; height: 15px;
+      flex-shrink: 0;
+      color: #e8a045;
+    }
+
+    /* ===== EMPTY STATE ===== */
+    .dh-empty {
+      grid-column: 1/-1;
+      text-align: center;
+      padding: 70px 24px;
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.05);
+    }
+    .dh-empty h3 { font-size: 1.4rem; color:#1a3a4f; margin-bottom: 10px; }
+    .dh-empty p  { color: #888; font-size: 1rem; margin-bottom: 28px; }
+    .dh-btn {
+      display: inline-block;
+      background: #e8a045; color: #fff;
+      padding: 13px 36px; border-radius: 50px;
+      font-family: 'DM Sans', sans-serif; font-weight: 600;
+      text-decoration: none; font-size: .95rem;
+    }
+    .dh-btn:hover { background: #d4913a; }
+
+    @media (max-width: 640px) {
+      .dh-grid { grid-template-columns: 1fr; }
+      .dh-hero  { height: 40vh; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar scrolled" id="navbar">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <img src="travel_logo.png" alt="Travel Horizon Logo" class="nav-logo-img">
+    </a>
+    <ul class="nav-links">
+      <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+      <li class="nav-item"><a href="tours.html" class="nav-link">India</a></li>
+      <li class="nav-item"><a href="tours.html" class="nav-link">International</a></li>
+      <li class="nav-item"><a href="tours.html" class="nav-link">Group Tours</a></li>
+      <li class="nav-item"><a href="contact.html" class="nav-link">Visa &amp; Contact</a></li>
+    </ul>
+    <a href="contact.html" class="btn btn-primary nav-cta">📞 +91 98765 43210</a>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="dh-hero" id="dhHero">
+  <div class="dh-hero-text">
+    <span class="dh-hero-label" id="dhLabel">Destination</span>
+    <h1 class="dh-hero-title" id="dhTitle">Tours</h1>
+  </div>
+</div>
+
+<!-- TOURS GRID -->
+<section class="dh-section">
+  <div class="dh-container">
+    <div class="dh-heading" id="dhHeading">Available Tour Packages</div>
+    <div class="dh-grid" id="dhGrid">
+      <div class="dh-empty"><h3>Loading tours…</h3></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-bottom" style="border-top:none;padding:40px 0;">
+      <p>© 2025 Travel Horizon Tours &amp; Travels. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<!-- INLINE TOUR DATA (guaranteed to work even if cache serves old tourData.js) -->
+<script>
+// ============================================================
+// COMPLETE TOUR DATA – all destinations, 4 packages each
+// ============================================================
+var inlineTours = {
+
+  /* ====== DUBAI ====== */
+  "dubai": {
+    title: "Dazzling Dubai Group Tour",
+    img:   "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=800&q=80",
+    type:  "6 Days / 5 Nights",
+    loc:   "Dubai"
+  },
+  "dubai-abu-dhabi": {
+    title: "Dubai & Abu Dhabi Yas Island Holiday",
+    img:   "https://images.unsplash.com/photo-1518684079-3c830dcef090?w=800&q=80",
+    type:  "6 Days / 5 Nights",
+    loc:   "Dubai · Abu Dhabi"
+  },
+  "dubai-ferrari": {
+    title: "Magical Dubai With Ferrari World",
+    img:   "https://images.unsplash.com/photo-1531804226-1bb8b80f3e3f?w=800&q=80",
+    type:  "6 Days / 5 Nights",
+    loc:   "Dubai · Abu Dhabi"
+  },
+  "dubai-desert": {
+    title: "Dubai Desert Safari & Evening Marina Cruise",
+    img:   "https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=800&q=80",
+    type:  "5 Days / 4 Nights",
+    loc:   "Dubai"
+  },
+
+  /* ====== BALI ====== */
+  "bali-ubud": {
+    title: "Bali Ubud & Seminyak Explorer",
+    img:   "https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800&q=80",
+    type:  "6 Days / 5 Nights",
+    loc:   "Ubud · Seminyak · Kuta"
+  },
+  "bali-nusa-penida": {
+    title: "Bali & Nusa Penida Adventure",
+    img:   "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=800&q=80",
+    type:  "7 Days / 6 Nights",
+    loc:   "Bali · Nusa Penida"
+  },
+  "bali-uluwatu": {
+    title: "Bali Uluwatu Beaches & Temples",
+    img:   "https://images.unsplash.com/photo-1573790387438-4da905039392?w=800&q=80",
+    type:  "5 Days / 4 Nights",
+    loc:   "Uluwatu · Jimbaran · Kuta"
+  },
+  "bali-honeymoon": {
+    title: "Bali Luxury Honeymoon – Private Villa Special",
+    img:   "https://images.unsplash.com/photo-1544644181-1484b3fdfc62?w=800&q=80",
+    type:  "7 Days / 6 Nights",
+    loc:   "Seminyak · Ubud · Nusa Dua"
+  },
+
+  /* ====== EUROPE ====== */
+  "europe-paris": {
+    title: "Paris & French Riviera Grand Tour",
+    img:   "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=800&q=80",
+    type:  "8 Days / 7 Nights",
+    loc:   "Paris · Nice · Monaco"
+  },
+  "europe-italy": {
+    title: "Italy Grand Tour – Rome, Florence & Venice",
+    img:   "https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=800&q=80",
+    type:  "9 Days / 8 Nights",
+    loc:   "Rome · Florence · Venice"
+  },
+  "europe-greece": {
+    title: "Greek Islands & Athens Odyssey",
+    img:   "https://images.unsplash.com/photo-1533105079780-92b9be482077?w=800&q=80",
+    type:  "8 Days / 7 Nights",
+    loc:   "Athens · Santorini · Mykonos"
+  },
+  "europe-combo": {
+    title: "Switzerland & Italy Scenic Rail Adventure",
+    img:   "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?w=800&q=80",
+    type:  "10 Days / 9 Nights",
+    loc:   "Zurich · Lucerne · Venice · Rome"
+  },
+
+  /* ====== SINGAPORE ====== */
+  "singapore": {
+    title: "Singapore & Malaysia Delight",
+    img:   "https://images.unsplash.com/photo-1565967511849-76a60a516170?w=800&q=80",
+    type:  "5 Days / 4 Nights",
+    loc:   "Singapore · Kuala Lumpur"
+  },
+  "singapore-universal": {
+    title: "Singapore Universal Studios Special",
+    img:   "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800&q=80",
+    type:  "5 Days / 4 Nights",
+    loc:   "Singapore"
+  },
+  "singapore-cruise": {
+    title: "Singapore & Luxury Cruise Package",
+    img:   "https://images.unsplash.com/photo-1508094722786-ab58e59ef4dc?w=800&q=80",
+    type:  "6 Days / 5 Nights",
+    loc:   "Singapore · Cruise"
+  },
+  "singapore-night": {
+    title: "Singapore Night Safari & Bird Paradise",
+    img:   "https://images.unsplash.com/photo-1546412414-8035e1776c9a?w=800&q=80",
+    type:  "4 Days / 3 Nights",
+    loc:   "Singapore"
+  },
+
+  /* ====== JAPAN ====== */
+  "japan-tokyo": {
+    title: "Tokyo & Kyoto Classic Japan Tour",
+    img:   "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&q=80",
+    type:  "8 Days / 7 Nights",
+    loc:   "Tokyo · Kyoto · Nara"
+  },
+  "japan-osaka": {
+    title: "Osaka, Hiroshima & Mount Fuji",
+    img:   "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80",
+    type:  "9 Days / 8 Nights",
+    loc:   "Osaka · Hiroshima · Hakone"
+  },
+  "japan-cherry": {
+    title: "Japan Cherry Blossom Special",
+    img:   "https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=800&q=80",
+    type:  "7 Days / 6 Nights",
+    loc:   "Tokyo · Kyoto · Hakone"
+  },
+  "japan-winter": {
+    title: "Japan Winter Wonderland – Hokkaido Ski",
+    img:   "https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=800&q=80",
+    type:  "8 Days / 7 Nights",
+    loc:   "Sapporo · Otaru · Niseko"
+  },
+
+  /* ====== SWITZERLAND ====== */
+  "switzerland": {
+    title: "Switzerland & Paris Escape",
+    img:   "https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=800&q=80",
+    type:  "9 Days / 8 Nights",
+    loc:   "Zurich · Lucerne · Paris"
+  },
+  "switzerland-alps": {
+    title: "Swiss Alps & Glacier Express Journey",
+    img:   "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+    type:  "8 Days / 7 Nights",
+    loc:   "Zurich · Zermatt · St. Moritz"
+  },
+  "switzerland-lucerne": {
+    title: "Lucerne, Interlaken & Zurich Explorer",
+    img:   "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=800&q=80",
+    type:  "7 Days / 6 Nights",
+    loc:   "Lucerne · Interlaken · Zurich"
+  },
+  "switzerland-chocolate": {
+    title: "Swiss Chocolate, Cheese & Panoramic Trains",
+    img:   "https://images.unsplash.com/photo-1528702748617-c64d49f918af?w=800&q=80",
+    type:  "6 Days / 5 Nights",
+    loc:   "Geneva · Montreux · Interlaken"
+  },
+
+  /* ====== POPULAR: COORG ====== */
+  "coorg": {
+    title: "Coorg Coffee Estate Stay",
+    img:   "https://picsum.photos/seed/coorg1/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Coorg"
+  },
+  "coorg-wildlife": {
+    title: "Coorg & Nagarhole Safari",
+    img:   "https://picsum.photos/seed/coorg2/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Coorg · Nagarhole"
+  },
+  "coorg-trek": {
+    title: "Tadiandamol Peak Trek",
+    img:   "https://picsum.photos/seed/coorg3/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Coorg"
+  },
+  "coorg-luxury": {
+    title: "Coorg Luxury Resort Getaway",
+    img:   "https://picsum.photos/seed/coorg4/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Madikeri"
+  },
+
+  /* ====== POPULAR: OOTY ====== */
+  "ooty": {
+    title: "Ooty Queen of Hills",
+    img:   "https://picsum.photos/seed/ooty1/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Ooty"
+  },
+  "ooty-conoor": {
+    title: "Ooty & Coonoor Tea Gardens",
+    img:   "https://picsum.photos/seed/ooty2/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Ooty · Coonoor"
+  },
+  "ooty-kodaikanal": {
+    title: "Ooty & Kodaikanal Combo",
+    img:   "https://picsum.photos/seed/ooty3/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Ooty · Kodaikanal"
+  },
+  "ooty-toy-train": {
+    title: "Nilgiri Mountain Railway Tour",
+    img:   "https://picsum.photos/seed/ooty4/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Mettupalayam · Ooty"
+  },
+
+  /* ====== POPULAR: MUNNAR ====== */
+  "munnar": {
+    title: "Munnar Tea Trails",
+    img:   "https://picsum.photos/seed/mun1/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Munnar"
+  },
+  "munnar-alleppey": {
+    title: "Munnar & Alleppey Houseboat",
+    img:   "https://picsum.photos/seed/mun2/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Munnar · Alleppey"
+  },
+  "munnar-thekkady": {
+    title: "Munnar & Periyar Wildlife",
+    img:   "https://picsum.photos/seed/mun3/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Munnar · Thekkady"
+  },
+  "munnar-luxury": {
+    title: "Munnar Luxury Treehouse Stay",
+    img:   "https://picsum.photos/seed/mun4/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Munnar"
+  },
+
+  /* ====== POPULAR: MAHABALESHWAR ====== */
+  "mahabaleshwar": {
+    title: "Mahabaleshwar Strawberry Tour",
+    img:   "https://picsum.photos/seed/maha1/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Mahabaleshwar"
+  },
+  "mahabaleshwar-panchgani": {
+    title: "Mahabaleshwar & Panchgani",
+    img:   "https://picsum.photos/seed/maha2/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Panchgani · Mahabaleshwar"
+  },
+  "mahabaleshwar-pratapgad": {
+    title: "Pratapgad Fort Heritage Tour",
+    img:   "https://picsum.photos/seed/maha3/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Mahabaleshwar"
+  },
+  "mahabaleshwar-monsoon": {
+    title: "Mahabaleshwar Monsoon Magic",
+    img:   "https://picsum.photos/seed/maha4/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Mahabaleshwar"
+  },
+
+  /* ====== POPULAR: SHIMLA & MANALI ====== */
+  "shimlamanali": {
+    title: "Classic Shimla Manali Tour",
+    img:   "https://picsum.photos/seed/sm1/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Shimla · Manali"
+  },
+  "shimlamanali-snow": {
+    title: "Rohtang Pass Snow Adventure",
+    img:   "https://picsum.photos/seed/sm2/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Manali · Rohtang"
+  },
+  "shimlamanali-honeymoon": {
+    title: "Shimla Manali Romantic Honeymoon",
+    img:   "https://picsum.photos/seed/sm3/800/600",
+    type:  "7 Days / 6 Nights",
+    loc:   "Shimla · Kullu · Manali"
+  },
+  "shimlamanali-volvo": {
+    title: "Delhi to Shimla Manali Volvo Package",
+    img:   "https://picsum.photos/seed/sm4/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Shimla · Manali"
+  },
+
+  /* ====== POPULAR: PONDICHERRY ====== */
+  "pondicherry": {
+    title: "Pondicherry French Colony Tour",
+    img:   "https://picsum.photos/seed/pondi1/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Pondicherry"
+  },
+  "pondicherry-auroville": {
+    title: "Auroville & Heritage Walk",
+    img:   "https://picsum.photos/seed/pondi2/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Pondicherry · Auroville"
+  },
+  "pondicherry-mahabalipuram": {
+    title: "Pondicherry & Mahabalipuram",
+    img:   "https://picsum.photos/seed/pondi3/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Pondicherry · Mahabalipuram"
+  },
+  "pondicherry-beach": {
+    title: "Pondicherry Beach Resort Stay",
+    img:   "https://picsum.photos/seed/pondi4/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Pondicherry"
+  },
+
+  /* ====== POPULAR: SHIRDI ====== */
+  "shirdi": {
+    title: "Shirdi Sai Baba Darshan",
+    img:   "https://picsum.photos/seed/shirdi1/800/600",
+    type:  "2 Days / 1 Night",
+    loc:   "Shirdi"
+  },
+  "shirdi-shani": {
+    title: "Shirdi & Shani Shingnapur",
+    img:   "https://picsum.photos/seed/shirdi2/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Shirdi · Shingnapur"
+  },
+  "shirdi-nashik": {
+    title: "Shirdi with Nashik Trimbakeshwar",
+    img:   "https://picsum.photos/seed/shirdi3/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Shirdi · Nashik"
+  },
+  "shirdi-jyotirlinga": {
+    title: "Shirdi & 3 Jyotirlinga Darshan",
+    img:   "https://picsum.photos/seed/shirdi4/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Shirdi · Nashik · Aurangabad"
+  },
+
+  /* ====== POPULAR: VAISHNO DEVI ====== */
+  "vaishnodevi": {
+    title: "Vaishno Devi Yatra by Helicopter",
+    img:   "https://picsum.photos/seed/vaish1/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Katra · Vaishno Devi"
+  },
+  "vaishnodevi-shivkhori": {
+    title: "Vaishno Devi & Shiv Khori Tour",
+    img:   "https://picsum.photos/seed/vaish2/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Katra"
+  },
+  "vaishnodevi-patnitop": {
+    title: "Vaishno Devi with Patnitop",
+    img:   "https://picsum.photos/seed/vaish3/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Katra · Patnitop"
+  },
+  "vaishnodevi-kashmir": {
+    title: "Vaishno Devi & Kashmir Combo",
+    img:   "https://picsum.photos/seed/vaish4/800/600",
+    type:  "7 Days / 6 Nights",
+    loc:   "Katra · Srinagar"
+  },
+
+  /* ====== POPULAR: CHARDHAM YATRA ====== */
+  "chardham": {
+    title: "Complete Chardham Yatra",
+    img:   "https://picsum.photos/seed/char1/800/600",
+    type:  "12 Days / 11 Nights",
+    loc:   "Yamunotri · Gangotri · Kedarnath · Badrinath"
+  },
+  "chardham-heli": {
+    title: "Chardham Yatra by Helicopter",
+    img:   "https://picsum.photos/seed/char2/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Dehradun · Chardham"
+  },
+  "chardham-do": {
+    title: "Do Dham Yatra (Kedarnath & Badrinath)",
+    img:   "https://picsum.photos/seed/char3/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Kedarnath · Badrinath"
+  },
+  "chardham-kedarnath": {
+    title: "Kedarnath Helicopter Tour",
+    img:   "https://picsum.photos/seed/char4/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Guptkashi · Kedarnath"
+  },
+
+  /* ====== POPULAR: AROUND BANGALORE ====== */
+  "bangalore": {
+    title: "Mysore & Ooty from Bangalore",
+    img:   "https://picsum.photos/seed/blr1/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Mysore · Ooty"
+  },
+  "bangalore-nandi": {
+    title: "Nandi Hills & Lepakshi Weekend",
+    img:   "https://picsum.photos/seed/blr2/800/600",
+    type:  "2 Days / 1 Night",
+    loc:   "Nandi Hills · Lepakshi"
+  },
+  "bangalore-kabini": {
+    title: "Kabini Wildlife Weekend",
+    img:   "https://picsum.photos/seed/blr3/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Kabini"
+  },
+  "bangalore-belur": {
+    title: "Belur, Halebidu & Chikmagalur",
+    img:   "https://picsum.photos/seed/blr4/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Chikmagalur"
+  },
+
+  /* ====== INTERNATIONAL: THAILAND ====== */
+  "thailand": {
+    title: "Bangkok & Pattaya Escape",
+    img:   "https://picsum.photos/seed/thai1/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Bangkok · Pattaya"
+  },
+  "thailand-phuket": {
+    title: "Phuket & Krabi Beach Tour",
+    img:   "https://picsum.photos/seed/thai2/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Phuket · Krabi"
+  },
+  "thailand-islands": {
+    title: "Phi Phi Islands Adventure",
+    img:   "https://picsum.photos/seed/thai3/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Phi Phi · Phuket"
+  },
+  "thailand-chiangmai": {
+    title: "Chiang Mai Nature Retreat",
+    img:   "https://picsum.photos/seed/thai4/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Chiang Mai"
+  },
+
+  /* ====== INTERNATIONAL: SRI LANKA ====== */
+  "srilanka": {
+    title: "Sri Lanka Heritage Tour",
+    img:   "https://picsum.photos/seed/sri1/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Colombo · Kandy · Nuwara Eliya"
+  },
+  "srilanka-beach": {
+    title: "Bentota Beach Getaway",
+    img:   "https://picsum.photos/seed/sri2/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Bentota · Galle"
+  },
+  "srilanka-wildlife": {
+    title: "Yala Wildlife Safari",
+    img:   "https://picsum.photos/seed/sri3/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Yala National Park"
+  },
+  "srilanka-culture": {
+    title: "Sigiriya & Dambulla Explorer",
+    img:   "https://picsum.photos/seed/sri4/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Sigiriya · Dambulla"
+  },
+
+  /* ====== INTERNATIONAL: MALDIVES ====== */
+  "maldives": {
+    title: "Maldives Luxury Water Villa",
+    img:   "https://picsum.photos/seed/mal1/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Maldives Islands"
+  },
+  "maldives-honeymoon": {
+    title: "Romantic Maldives Honeymoon",
+    img:   "https://picsum.photos/seed/mal2/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Private Island Resort"
+  },
+  "maldives-scuba": {
+    title: "Maldives Diving & Snorkeling",
+    img:   "https://picsum.photos/seed/mal3/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "North Male Atoll"
+  },
+  "maldives-family": {
+    title: "Maldives Family Resort Vacation",
+    img:   "https://picsum.photos/seed/mal4/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "South Male Atoll"
+  },
+
+  /* ====== INTERNATIONAL: EGYPT ====== */
+  "egypt": {
+    title: "Pyramids of Giza & Sphinx",
+    img:   "https://picsum.photos/seed/egy1/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Cairo · Giza"
+  },
+  "egypt-nile": {
+    title: "Nile River Cruise",
+    img:   "https://picsum.photos/seed/egy2/800/600",
+    type:  "7 Days / 6 Nights",
+    loc:   "Luxor · Aswan"
+  },
+  "egypt-redsea": {
+    title: "Sharm El Sheikh Red Sea Escape",
+    img:   "https://picsum.photos/seed/egy3/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Sharm El Sheikh"
+  },
+  "egypt-history": {
+    title: "Alexandria & Cairo Explorer",
+    img:   "https://picsum.photos/seed/egy4/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Cairo · Alexandria"
+  },
+
+  /* ====== INTERNATIONAL: TURKEY ====== */
+  "turkey": {
+    title: "Istanbul City & Bosphorus Tour",
+    img:   "https://picsum.photos/seed/tur1/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Istanbul"
+  },
+  "turkey-cappadocia": {
+    title: "Cappadocia Hot Air Balloon Adventure",
+    img:   "https://picsum.photos/seed/tur2/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Cappadocia · Istanbul"
+  },
+  "turkey-pamukkale": {
+    title: "Pamukkale Thermal Pools & Ephesus",
+    img:   "https://picsum.photos/seed/tur3/800/600",
+    type:  "7 Days / 6 Nights",
+    loc:   "Pamukkale · Izmir"
+  },
+  "turkey-antalya": {
+    title: "Antalya Turkish Riviera",
+    img:   "https://picsum.photos/seed/tur4/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Antalya"
+  },
+
+  /* ====== INTERNATIONAL: UZBEKISTAN ====== */
+  "uzbekistan": {
+    title: "Tashkent & Samarkand Silk Road",
+    img:   "https://picsum.photos/seed/uzb1/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Tashkent · Samarkand"
+  },
+  "uzbekistan-bukhara": {
+    title: "Bukhara Ancient City Tour",
+    img:   "https://picsum.photos/seed/uzb2/800/600",
+    type:  "7 Days / 6 Nights",
+    loc:   "Bukhara · Samarkand"
+  },
+  "uzbekistan-khiva": {
+    title: "Khiva Desert Fortress",
+    img:   "https://picsum.photos/seed/uzb3/800/600",
+    type:  "8 Days / 7 Nights",
+    loc:   "Khiva · Bukhara"
+  },
+  "uzbekistan-grand": {
+    title: "Grand Uzbekistan Express",
+    img:   "https://picsum.photos/seed/uzb4/800/600",
+    type:  "10 Days / 9 Nights",
+    loc:   "Tashkent · Samarkand · Bukhara · Khiva"
+  },
+
+  /* ====== INTERNATIONAL: USA ====== */
+  "usa": {
+    title: "New York City Explorer",
+    img:   "https://picsum.photos/seed/usa1/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "New York City"
+  },
+  "usa-west": {
+    title: "West Coast Road Trip",
+    img:   "https://picsum.photos/seed/usa2/800/600",
+    type:  "10 Days / 9 Nights",
+    loc:   "Los Angeles · Las Vegas · San Francisco"
+  },
+  "usa-florida": {
+    title: "Florida Theme Parks & Beaches",
+    img:   "https://picsum.photos/seed/usa3/800/600",
+    type:  "8 Days / 7 Nights",
+    loc:   "Orlando · Miami"
+  },
+  "usa-hawaii": {
+    title: "Hawaii Tropical Paradise",
+    img:   "https://picsum.photos/seed/usa4/800/600",
+    type:  "7 Days / 6 Nights",
+    loc:   "Honolulu · Maui"
+  },
+
+  /* ====== INTERNATIONAL: AUSTRALIA ====== */
+  "australia": {
+    title: "Sydney & Gold Coast Escape",
+    img:   "https://picsum.photos/seed/aus1/800/600",
+    type:  "8 Days / 7 Nights",
+    loc:   "Sydney · Gold Coast"
+  },
+  "australia-reef": {
+    title: "Great Barrier Reef Adventure",
+    img:   "https://picsum.photos/seed/aus2/800/600",
+    type:  "7 Days / 6 Nights",
+    loc:   "Cairns · Brisbane"
+  },
+  "australia-melbourne": {
+    title: "Melbourne & Great Ocean Road",
+    img:   "https://picsum.photos/seed/aus3/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Melbourne"
+  },
+  "australia-nz": {
+    title: "Australia & New Zealand Grand Tour",
+    img:   "https://picsum.photos/seed/aus4/800/600",
+    type:  "14 Days / 13 Nights",
+    loc:   "Sydney · Melbourne · Auckland · Queenstown"
+  },
+
+  /* ====== DOMESTIC: KERALA ====== */
+  "kerala": {
+    title: "Magical Kerala Backwaters & Hills",
+    img:   "https://picsum.photos/seed/kerala1/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Munnar · Alleppey"
+  },
+  "kerala-premium": {
+    title: "Premium Kerala Experience",
+    img:   "https://picsum.photos/seed/kerala2/800/600",
+    type:  "7 Days / 6 Nights",
+    loc:   "Kochi · Munnar · Thekkady"
+  },
+  "kerala-houseboat": {
+    title: "Alleppey Houseboat Retreat",
+    img:   "https://picsum.photos/seed/kerala3/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Alleppey"
+  },
+  "kerala-wayanad": {
+    title: "Wayanad Nature Escape",
+    img:   "https://picsum.photos/seed/kerala4/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Wayanad"
+  },
+
+  /* ====== DOMESTIC: RAJASTHAN ====== */
+  "rajasthan": {
+    title: "Royal Rajasthan Heritage Tour",
+    img:   "https://picsum.photos/seed/raj1/800/600",
+    type:  "8 Days / 7 Nights",
+    loc:   "Jaipur · Jodhpur · Udaipur"
+  },
+  "rajasthan-desert": {
+    title: "Desert Safari & Forts",
+    img:   "https://picsum.photos/seed/raj2/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Jaisalmer · Bikaner"
+  },
+  "rajasthan-pushkar": {
+    title: "Pushkar & Ajmer Tour",
+    img:   "https://picsum.photos/seed/raj3/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Pushkar · Ajmer"
+  },
+  "rajasthan-mountabu": {
+    title: "Mount Abu Hill Station",
+    img:   "https://picsum.photos/seed/raj4/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Mount Abu"
+  },
+
+  /* ====== DOMESTIC: KASHMIR ====== */
+  "kashmir": {
+    title: "Heaven on Earth - Kashmir Valley",
+    img:   "https://picsum.photos/seed/kash1/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Srinagar · Gulmarg"
+  },
+  "kashmir-tulip": {
+    title: "Kashmir Tulip Festival Special",
+    img:   "https://picsum.photos/seed/kash2/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Srinagar · Pahalgam"
+  },
+  "kashmir-sonmarg": {
+    title: "Sonmarg Glacier Tour",
+    img:   "https://picsum.photos/seed/kash3/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Sonmarg"
+  },
+  "kashmir-leh": {
+    title: "Leh Ladakh Adventure",
+    img:   "https://picsum.photos/seed/kash4/800/600",
+    type:  "9 Days / 8 Nights",
+    loc:   "Leh · Nubra · Pangong"
+  },
+
+  /* ====== DOMESTIC: HIMACHAL ====== */
+  "himachal": {
+    title: "Scenic Himachal Holiday",
+    img:   "https://picsum.photos/seed/him1/800/600",
+    type:  "7 Days / 6 Nights",
+    loc:   "Shimla · Manali"
+  },
+  "himachal-adventure": {
+    title: "Spiti Valley Adventure",
+    img:   "https://picsum.photos/seed/him2/800/600",
+    type:  "9 Days / 8 Nights",
+    loc:   "Spiti · Kaza"
+  },
+  "himachal-dalhousie": {
+    title: "Dalhousie & Dharamshala",
+    img:   "https://picsum.photos/seed/him3/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Dalhousie · Dharamshala"
+  },
+  "himachal-kullu": {
+    title: "Kullu Valley Retreat",
+    img:   "https://picsum.photos/seed/him4/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Kullu · Manali"
+  },
+
+  /* ====== DOMESTIC: GOA ====== */
+  "goa": {
+    title: "Goa Beach Retreat",
+    img:   "https://picsum.photos/seed/goa1/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "North Goa"
+  },
+  "goa-luxury": {
+    title: "South Goa Luxury Getaway",
+    img:   "https://picsum.photos/seed/goa2/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "South Goa"
+  },
+  "goa-party": {
+    title: "North Goa Party Tour",
+    img:   "https://picsum.photos/seed/goa3/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Baga · Calangute"
+  },
+  "goa-heritage": {
+    title: "Old Goa Heritage Walk",
+    img:   "https://picsum.photos/seed/goa4/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Panjim · Old Goa"
+  },
+
+  /* ====== DOMESTIC: KARNATAKA ====== */
+  "karnataka": {
+    title: "Royal Karnataka: Palaces & Ruins",
+    img:   "https://picsum.photos/seed/kar1/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Mysore · Hampi"
+  },
+  "karnataka-coorg": {
+    title: "Coorg Coffee Trails & Wildlife",
+    img:   "https://picsum.photos/seed/kar2/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Coorg · Kabini"
+  },
+  "karnataka-gokarna": {
+    title: "Gokarna Beach Trek",
+    img:   "https://picsum.photos/seed/kar3/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Gokarna"
+  },
+  "karnataka-badami": {
+    title: "Badami Cave Temples",
+    img:   "https://picsum.photos/seed/kar4/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Badami · Pattadakal"
+  },
+
+  /* ====== DOMESTIC: TAMIL NADU ====== */
+  "tamilnadu": {
+    title: "Tamil Nadu Temple Architecture",
+    img:   "https://picsum.photos/seed/tn1/800/600",
+    type:  "7 Days / 6 Nights",
+    loc:   "Madurai · Thanjavur"
+  },
+  "tamilnadu-ooty": {
+    title: "Ooty & Kodaikanal Hills",
+    img:   "https://picsum.photos/seed/tn2/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Ooty · Kodaikanal"
+  },
+  "tamilnadu-kanyakumari": {
+    title: "Kanyakumari Coastal Tour",
+    img:   "https://picsum.photos/seed/tn3/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Kanyakumari"
+  },
+  "tamilnadu-rameswaram": {
+    title: "Rameswaram Pilgrimage",
+    img:   "https://picsum.photos/seed/tn4/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Rameswaram"
+  },
+
+  /* ====== DOMESTIC: ANDAMAN ====== */
+  "andaman": {
+    title: "Andaman Islands Explorer",
+    img:   "https://picsum.photos/seed/and1/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Port Blair · Havelock"
+  },
+  "andaman-scuba": {
+    title: "Andaman Scuba & Beaches",
+    img:   "https://picsum.photos/seed/and2/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Havelock · Neil Island"
+  },
+  "andaman-baratang": {
+    title: "Baratang Limestone Caves",
+    img:   "https://picsum.photos/seed/and3/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Baratang Island"
+  },
+  "andaman-ross": {
+    title: "Ross Island History",
+    img:   "https://picsum.photos/seed/and4/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Ross Island"
+  },
+
+  /* ====== DOMESTIC: LAKSHADWEEP ====== */
+  "lakshadweep": {
+    title: "Lakshadweep Coral Reefs",
+    img:   "https://picsum.photos/seed/lak1/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Agatti · Bangaram"
+  },
+  "lakshadweep-cruise": {
+    title: "Lakshadweep Samudram Cruise",
+    img:   "https://picsum.photos/seed/lak2/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Kavaratti · Kalpeni"
+  },
+  "lakshadweep-minicoy": {
+    title: "Minicoy Island Tour",
+    img:   "https://picsum.photos/seed/lak3/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Minicoy"
+  },
+  "lakshadweep-water": {
+    title: "Kadmat Water Sports",
+    img:   "https://picsum.photos/seed/lak4/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Kadmat Island"
+  },
+
+  /* ====== DOMESTIC: DELHI ====== */
+  "delhi": {
+    title: "Delhi Historical City Tour",
+    img:   "https://picsum.photos/seed/del1/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "New Delhi · Old Delhi"
+  },
+  "delhi-agra": {
+    title: "Delhi & Agra Golden Tour",
+    img:   "https://picsum.photos/seed/del2/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Delhi · Agra"
+  },
+  "delhi-shopping": {
+    title: "Delhi Shopping & Food",
+    img:   "https://picsum.photos/seed/del3/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Chandni Chowk · Connaught Place"
+  },
+  "delhi-temples": {
+    title: "Delhi Spiritual Tour",
+    img:   "https://picsum.photos/seed/del4/800/600",
+    type:  "2 Days / 1 Night",
+    loc:   "Akshardham · Lotus Temple"
+  },
+
+  /* ====== DOMESTIC: UTTAR PRADESH ====== */
+  "uttarpradesh": {
+    title: "Varanasi Spiritual Journey",
+    img:   "https://picsum.photos/seed/up1/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Varanasi · Sarnath"
+  },
+  "uttarpradesh-taj": {
+    title: "Taj Mahal & Fatehpur Sikri",
+    img:   "https://picsum.photos/seed/up2/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Agra · Fatehpur Sikri"
+  },
+  "uttarpradesh-mathura": {
+    title: "Mathura & Vrindavan",
+    img:   "https://picsum.photos/seed/up3/800/600",
+    type:  "2 Days / 1 Night",
+    loc:   "Mathura · Vrindavan"
+  },
+  "uttarpradesh-lucknow": {
+    title: "Lucknow Nawabi Tour",
+    img:   "https://picsum.photos/seed/up4/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Lucknow"
+  },
+
+  /* ====== DOMESTIC: NORTH EAST ====== */
+  "northeast": {
+    title: "Meghalaya Waterfalls & Caves",
+    img:   "https://picsum.photos/seed/ne1/800/600",
+    type:  "6 Days / 5 Nights",
+    loc:   "Shillong · Cherrapunji"
+  },
+  "northeast-sikkim": {
+    title: "Sikkim & Darjeeling Retreat",
+    img:   "https://picsum.photos/seed/ne2/800/600",
+    type:  "7 Days / 6 Nights",
+    loc:   "Gangtok · Darjeeling"
+  },
+  "northeast-kaziranga": {
+    title: "Kaziranga Rhino Safari",
+    img:   "https://picsum.photos/seed/ne3/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Kaziranga National Park"
+  },
+  "northeast-tawang": {
+    title: "Tawang Monastery Tour",
+    img:   "https://picsum.photos/seed/ne4/800/600",
+    type:  "8 Days / 7 Nights",
+    loc:   "Tawang · Bomdila"
+  },
+
+  /* ====== DOMESTIC: CENTRAL INDIA ====== */
+  "central": {
+    title: "Madhya Pradesh Wildlife Safari",
+    img:   "https://picsum.photos/seed/cen1/800/600",
+    type:  "5 Days / 4 Nights",
+    loc:   "Bandhavgarh · Kanha"
+  },
+  "central-heritage": {
+    title: "Khajuraho & Orchha Heritage",
+    img:   "https://picsum.photos/seed/cen2/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Khajuraho · Orchha"
+  },
+  "central-ujjain": {
+    title: "Ujjain & Omkareshwar",
+    img:   "https://picsum.photos/seed/cen3/800/600",
+    type:  "3 Days / 2 Nights",
+    loc:   "Ujjain · Omkareshwar"
+  },
+  "central-pachmarhi": {
+    title: "Pachmarhi Hill Station",
+    img:   "https://picsum.photos/seed/cen4/800/600",
+    type:  "4 Days / 3 Nights",
+    loc:   "Pachmarhi"
+  }
+};
+
+// Hero images per destination
+var heroImages = {
+  europe:      'https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=1600&q=80',
+  bali:        'https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=1600&q=80',
+  dubai:       'https://images.unsplash.com/photo-1512453979798-5ea266f8880c?w=1600&q=80',
+  singapore:   'https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=1600&q=80',
+  japan:       'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1600&q=80',
+  switzerland: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?w=1600&q=80',
+  thailand:    'https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=1600&q=80',
+  kerala:      'https://picsum.photos/seed/kerala_hero/1600/600',
+  rajasthan:   'https://picsum.photos/seed/raj_hero/1600/600',
+  kashmir:     'https://picsum.photos/seed/kash_hero/1600/600',
+  karnataka:   'karnataka-hero.png',
+  tamilnadu:   'https://picsum.photos/seed/tn_hero/1600/600',
+  andaman:     'https://picsum.photos/seed/and_hero/1600/600',
+  lakshadweep: 'https://picsum.photos/seed/lak_hero/1600/600',
+  delhi:       'https://picsum.photos/seed/del_hero/1600/600',
+  uttarpradesh:'https://picsum.photos/seed/up_hero/1600/600',
+  himachal:    'https://picsum.photos/seed/him_hero/1600/600',
+  goa:         'https://picsum.photos/seed/goa_hero/1600/600',
+  northeast:   'https://picsum.photos/seed/ne_hero/1600/600',
+  central:     'https://picsum.photos/seed/cen_hero/1600/600',
+  srilanka:    'https://picsum.photos/seed/sri_hero/1600/600',
+  maldives:    'https://picsum.photos/seed/mal_hero/1600/600',
+  egypt:       'https://picsum.photos/seed/egy_hero/1600/600',
+  turkey:      'https://picsum.photos/seed/tur_hero/1600/600',
+  uzbekistan:  'https://picsum.photos/seed/uzb_hero/1600/600',
+  usa:         'https://picsum.photos/seed/usa_hero/1600/600',
+  usa:         'https://picsum.photos/seed/usa_hero/1600/600',
+  australia:   'https://picsum.photos/seed/aus_hero/1600/600',
+  coorg:         'https://picsum.photos/seed/coorg_hero/1600/600',
+  ooty:          'https://picsum.photos/seed/ooty_hero/1600/600',
+  munnar:        'https://picsum.photos/seed/mun_hero/1600/600',
+  mahabaleshwar: 'https://picsum.photos/seed/maha_hero/1600/600',
+  shimlamanali:  'https://picsum.photos/seed/sm_hero/1600/600',
+  pondicherry:   'https://picsum.photos/seed/pondi_hero/1600/600',
+  shirdi:        'https://picsum.photos/seed/shirdi_hero/1600/600',
+  vaishnodevi:   'https://picsum.photos/seed/vaish_hero/1600/600',
+  chardham:      'https://picsum.photos/seed/char_hero/1600/600',
+  bangalore:     'https://picsum.photos/seed/blr_hero/1600/600'
+};
+
+document.addEventListener('DOMContentLoaded', function() {
+  var params   = new URLSearchParams(window.location.search);
+  var dest     = (params.get('dest') || '').toLowerCase().trim();
+  var destName = dest ? (dest.charAt(0).toUpperCase() + dest.slice(1)) : 'All';
+
+  // Update page title & meta
+  document.getElementById('pageTitle').textContent  = destName + ' Tours – Travel Horizon';
+  document.getElementById('dhTitle').textContent     = destName;
+  document.getElementById('dhLabel').textContent     = 'Destination';
+  document.getElementById('dhHeading').textContent   = destName + ' Tour Packages';
+
+  // Set hero background
+  if (heroImages[dest]) {
+    document.getElementById('dhHero').style.backgroundImage = "url('" + heroImages[dest] + "')";
+  }
+
+  // Filter packages
+  var grid = document.getElementById('dhGrid');
+  grid.innerHTML = '';
+
+  var results = Object.keys(inlineTours).filter(function(k) {
+    return !dest || k === dest || k.indexOf(dest + '-') === 0 || k.indexOf('-' + dest) !== -1;
+  });
+
+  if (results.length === 0) {
+    grid.innerHTML = '<div class="dh-empty"><h3>No packages found for ' + destName + ' yet.</h3><p>But don\'t worry! We can craft a perfect itinerary for you.</p><a class="dh-btn" href="contact.html">Enquire Now</a></div>';
+    return;
+  }
+
+  results.forEach(function(key) {
+    var t = inlineTours[key];
+    var card = '<a class="dh-card" href="tour-detail.html?pkg=' + key + '">' +
+      '<div class="dh-card-thumb"><img src="' + t.img + '" alt="' + t.title + '" loading="lazy"></div>' +
+      '<div class="dh-card-body">' +
+        '<div class="dh-card-title">' + t.title + '</div>' +
+        '<div class="dh-card-meta">' +
+          '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>' +
+          t.type +
+        '</div>' +
+        '<div class="dh-card-meta">' +
+          '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>' +
+          t.loc +
+        '</div>' +
+      '</div></a>';
+    grid.insertAdjacentHTML('beforeend', card);
+  });
+});
+
+// Hamburger toggle
+document.getElementById('hamburger') && document.getElementById('hamburger').addEventListener('click', function() {
+  document.getElementById('navbar').classList.toggle('mobile-open');
+});
+</script>
+
+</body>
+</html>
